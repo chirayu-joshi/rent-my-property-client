@@ -6,4 +6,8 @@
 
 body {
   font-family: 'Nunito', sans-serif;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background-color: #f2f3f7;
 }

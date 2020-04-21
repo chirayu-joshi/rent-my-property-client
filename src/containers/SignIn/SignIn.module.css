@@ -9,15 +9,6 @@
   width: 50vw;
 }
 
-.logo {
-  width: 100px;
-  height: 100px;
-  position: absolute;
-  left: 0;
-  top: 0;
-  margin: 24px;
-}
-
 .mainImg {
   width: 100%;
   /* height: 100%; */
@@ -39,17 +30,18 @@
 
 .tagLine {
   font-size: 1.5rem;
+  color: #777;
 }
 
 .shortLine {
   height: 5px;
   background-color: #2B66FC;
   width: 70px;
-  margin: 50px 0px;
+  margin: 35px 0px;
 }
 
 .inputContainer {
-  margin-top: 100px;
+  margin-top: 150px;
 }
 
 .input {
@@ -58,9 +50,9 @@
 
 .input input{
   display: block;
-  background: none;
+  background-color: #fff;
   border: 1px solid #ccc;
-  border-radius: 2px;
+  border-radius: 4px;
   font-size: 1.1rem;
   padding-left: 80px;
   width: 100%;
@@ -75,7 +67,7 @@
 
 .emailInput, .passwordInput {
   height: 100%;
-  padding: 20px;
+  padding: 24px;
 }
 
 .btnContainer {
@@ -130,6 +122,7 @@
   padding: 18px;
   box-shadow: 0px 0px 16px #ccc;
   transition: all 0.3s ease;
+  background-color: #fff;
 }
 
 .btnContainer a:hover {

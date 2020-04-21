@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from '../../axios';
 
+import InfoModal from '../../components/InfoModal/InfoModal';
+
+import Logo from '../../components/Logo/Logo';
 import styles from './SignIn.module.css';
-import logo from '../../assets/logo/logo.png';
 import emailIcon from '../../assets/email.png';
 import passwordIcon from '../../assets/password.png';
 import mainImg from '../../assets/houses_buildings/16.jpeg';
@@ -11,10 +13,15 @@ import mainImg from '../../assets/houses_buildings/16.jpeg';
 class SignIn extends Component {
   state = {
     email: '',
-    password: ''
+    password: '',
+    isLoading: true,
+    loginFailed: false
   }
 
   onSubmitHandler = () => {
+    this.setState({
+      isLoading: true
+    });
     axios.post('/api/signIn', {
       email: this.state.email.toLowerCase(),
       password: this.state.password
@@ -25,8 +32,15 @@ class SignIn extends Component {
       }
       localStorage.setItem('userTokenTime', JSON.stringify(data));
       console.log(JSON.parse(localStorage.getItem('userTokenTime')));
+      this.setState({
+        loginFailed: false,
+        isLoading: false
+      });
     }).catch(err => {
       console.log(err);
+      this.setState({
+        loginFailed: true
+      });
     });
   }
 
@@ -38,14 +52,15 @@ class SignIn extends Component {
   render() {
     return (
       <div className={styles.container} ref={this.wrapper}>
+        <InfoModal loading={this.state.isLoading}>Loading...</InfoModal>
+        <InfoModal loading={this.state.loginFailed}>Incorrect email or password</InfoModal>
         <div className={styles.imageContainer}>
-          <img className={styles.logo}
-            src={logo}
-            alt="logo" />
+          <Logo />
           <img
             className={styles.mainImg}
             src={mainImg}
-            alt="house" />
+            alt="house"
+            onLoad={() => this.setState({isLoading: false})} />
         </div>
         <form>
           <h1 className={styles.mainHeading}>

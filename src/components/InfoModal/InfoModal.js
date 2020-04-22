@@ -11,6 +11,16 @@ const infoModal = props => {
   } else {
     classes = ['infoModal__container'];
   }
+  switch(props.type) {
+    case 'error':
+      classes.push('infoModal__error');
+      break;
+    case 'info':
+      classes.push('infoModal__info');
+      break
+    default:
+      break;
+  }
   return (
     <div className={classes.join(' ')}>
       <LoadingAnimation />

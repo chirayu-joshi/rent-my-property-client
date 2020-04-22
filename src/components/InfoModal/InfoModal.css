@@ -5,7 +5,8 @@
   top: 0;
   right: -400px;
   background-color: white;
-  min-width: 350px;
+  width: 350px;
+  min-height: 80px;
   margin: 20px 25px;
   border-radius: 5px;
   box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.2);
@@ -22,4 +23,16 @@
   padding-left: 8px;
   font-weight: 500;
   color: #555;
+}
+
+.infoModal__error {
+  border-left: 6px solid #DC3E45;
+}
+
+.infoModal__info {
+  border-left: 6px solid #25A2B8;
+}
+
+.infoModal__error>:first-child, .infoModal__info>:first-child {
+  display: none;
 }

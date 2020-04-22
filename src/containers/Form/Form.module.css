@@ -1,0 +1,45 @@
+.container {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.imageContainer {
+  width: 50vw;
+}
+
+.mainImg {
+  width: 100%;
+  height: 100%;
+}
+
+.container form {
+  width: 50vw;
+  padding: 80px 150px;
+}
+
+.mainHeading {
+  font-size: 3rem;
+  margin-bottom: 10px;
+}
+
+.mainHeading span {
+  color: #2B66FC;
+}
+
+.tagLine {
+  font-size: 1.5rem;
+  color: #777;
+}
+
+.shortLine {
+  height: 5px;
+  background-color: #2B66FC;
+  width: 70px;
+  margin: 35px 0px;
+}
+
+.inputContainer {
+  margin-top: 150px;
+}

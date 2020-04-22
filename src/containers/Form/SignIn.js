@@ -3,11 +3,12 @@ import { Link } from 'react-router-dom';
 import axios from '../../axios';
 
 import InfoModal from '../../components/InfoModal/InfoModal';
+import EmailInput from '../../components/Input/EmailInput';
+import PasswordInput from '../../components/Input/PasswordInput';
+import ButtonContainer from '../../components/Input/BtnContainer/BtnContainer';
 
 import Logo from '../../components/Logo/Logo';
-import styles from './SignIn.module.css';
-import emailIcon from '../../assets/email.png';
-import passwordIcon from '../../assets/password.png';
+import styles from './Form.module.css';
 import mainImg from '../../assets/houses_buildings/16.jpeg';
 
 class SignIn extends Component {
@@ -51,16 +52,16 @@ class SignIn extends Component {
 
   render() {
     return (
-      <div className={styles.container} ref={this.wrapper}>
-        <InfoModal loading={this.state.isLoading}>Loading...</InfoModal>
-        <InfoModal loading={this.state.loginFailed}>Incorrect email or password</InfoModal>
+      <div className={styles.container}>
+        <InfoModal loading={this.state.isLoading} type="loading">Loading...</InfoModal>
+        <InfoModal loading={this.state.loginFailed} type="error">Incorrect email or password</InfoModal>
         <div className={styles.imageContainer}>
           <Logo />
           <img
             className={styles.mainImg}
             src={mainImg}
             alt="house"
-            onLoad={() => this.setState({isLoading: false})} />
+            onLoad={() => this.setState({ isLoading: false })} />
         </div>
         <form>
           <h1 className={styles.mainHeading}>
@@ -69,31 +70,13 @@ class SignIn extends Component {
           <p className={styles.tagLine}>Find easy rents near you</p>
           <hr className={styles.shortLine} />
           <div className={styles.inputContainer}>
-            <div className={styles.input}>
-              <div className={styles.inputIcon}>
-                <img src={emailIcon} alt="email" className={styles.emailInput} />
-              </div>
-              <input
-                type="email"
-                name="email"
-                placeholder="Email"
-                onChange={this.inputChangeHandler} />
-            </div>
-            <div className={styles.input}>
-              <div className={styles.inputIcon}>
-                <img src={passwordIcon} alt="password" className={styles.passwordInput} />
-              </div>
-              <input
-                type="password"
-                name="password"
-                placeholder="Password"
-                onChange={this.inputChangeHandler} />
-            </div>
+            <EmailInput change={this.inputChangeHandler} />
+            <PasswordInput change={this.inputChangeHandler} />
           </div>
-          <div className={styles.btnContainer}>
+          <ButtonContainer>
             <button onClick={this.onSubmitHandler} type="button">Sign In</button>
             <Link to="/signUp">Sign Up</Link>
-          </div>
+          </ButtonContainer>
         </form>
       </div>
     );

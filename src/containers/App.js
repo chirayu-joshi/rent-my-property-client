@@ -2,8 +2,8 @@ import React, { Fragment } from 'react';
 import { Route, Switch } from 'react-router-dom';
 
 import Dashboard from './Dashboard/Dashboard';
-import SignIn from './SignIn/SignIn';
-import SignUp from './SignUp/SignUp';
+import SignIn from './Form/SignIn';
+import SignUp from './Form/SignUp';
 import PageNotFound from '../components/PageNotFound/PageNotFound';
 
 function App() {

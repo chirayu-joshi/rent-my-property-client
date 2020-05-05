@@ -43,3 +43,7 @@
 .inputContainer {
   margin-top: 150px;
 }
+
+button:focus {
+  outline: none;
+}

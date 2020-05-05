@@ -11,7 +11,7 @@ const lastNameInput = props => (
     <input
       className={styles.input}
       type="text"
-      name="lastname"
+      name="lastName"
       placeholder="Last name"
       onChange={props.change}
       required />

@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import axios from '../../axios';
+import { Link, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
+
+import * as actions from '../../store/actions/index';
+import configs from '../../configs';
 
 import InfoModal from '../../components/InfoModal/InfoModal';
 import FirstNameInput from '../../components/Input/FirstNameInput';
@@ -8,16 +11,15 @@ import LastNameInput from '../../components/Input/LastNameInput';
 import EmailInput from '../../components/Input/EmailInput';
 import PasswordInput from '../../components/Input/PasswordInput';
 import ButtonContainer from '../../components/Input/BtnContainer/BtnContainer';
-import Logo from '../../components/Logo/Logo';
 
-import configs from '../../configs';
+import Logo from '../../components/Logo/Logo';
 import styles from './Form.module.css';
 import mainImg from '../../assets/stairs.jpeg';
 
 const validateForm = errors => {
   let valid = true;
   Object.values(errors).forEach(
-    (val) => val.length > 0 && (valid = false)
+    val => val.length > 0 && (valid = false)
   );
   return valid;
 }
@@ -28,8 +30,6 @@ class SignUp extends Component {
     lastName: '',
     email: '',
     password: '',
-    isLoading: true,
-    signUpFailed: false,
     errors: {
       firstname: '',
       lastname: '',
@@ -40,18 +40,8 @@ class SignUp extends Component {
 
   onSubmitHandler = () => {
     if (validateForm(this.state.errors)) {
-      axios.post('/api/signUp', {
-        firstName: this.state.firstName,
-        lastName: this.state.lastName,
-        email: this.state.email.toLowerCase(),
-        password: this.state.password
-      }).then(res => {
-        console.log(res.data);
-      }).catch(err => {
-        this.setState({
-          signUpFailed: true
-        });
-      });
+      console.log(this.state);
+      this.props.onSignUp(this.state.firstName, this.state.lastName, this.state.email, this.state.password);
     } else {
       console.log('Invalid form');
     }
@@ -102,18 +92,22 @@ class SignUp extends Component {
     if (errorMessage !== '') {
       infoModal = <InfoModal loading={errorMessage !== ''} type="info">{errorMessage}</InfoModal>
     }
+    if (this.props.signUpSuccessful) {
+      this.props.onClearSignUpState();
+      return <Redirect to="/signIn" />
+    }
     return (
       <div className={styles.container}>
-        <InfoModal loading={this.state.isLoading} type="loading">Loading...</InfoModal>
+        <InfoModal loading={this.props.isLoading} type="loading">Loading...</InfoModal>
         {infoModal}
-        <InfoModal loading={this.state.signUpFailed} type="error">Sign Up Failed</InfoModal>
+        <InfoModal loading={this.props.signUpFailed} type="error">Sign Up Failed</InfoModal>
         <form>
           <h1 className={styles.mainHeading}>
             Welcome to <span>Rent My Property</span>
           </h1>
           <p className={styles.tagLine}>Where luxury meets price</p>
           <hr className={styles.shortLine} />
-          <div style={{marginTop: '100px'}}>
+          <div style={{ marginTop: '100px' }}>
             <FirstNameInput change={this.inputChangeHandler} />
             <LastNameInput change={this.inputChangeHandler} />
             <EmailInput change={this.inputChangeHandler} />
@@ -130,11 +124,27 @@ class SignUp extends Component {
             className={styles.mainImg}
             src={mainImg}
             alt="house"
-            onLoad={() => this.setState({ isLoading: false })} />
+            onLoad={() => this.props.onImageLoaded()} />
         </div>
       </div>
     );
   }
 }
 
-export default SignUp;
+const mapStateToProps = state => {
+  return {
+    isLoading: state.signUp.isLoading,
+    signUpFailed: state.signUp.signUpFailed,
+    signUpSuccessful: state.signUp.signUpSuccessful
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onSignUp: (firstName, lastName, email, password) => dispatch(actions.signUp(firstName, lastName, email, password)),
+    onImageLoaded: () => dispatch(actions.imageLoadedSignUp()),
+    onClearSignUpState: () => dispatch(actions.clearSignUpState())
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignUp);

@@ -41,12 +41,21 @@ export const signIn = (email, password) => {
       email: email.toLowerCase(),
       password: password
     }).then(res => {
-      const data = {
-        token: res.data.token,
-        time: new Date().getTime()
-      }
-      localStorage.setItem('userTokenTime', JSON.stringify(data));
-      console.log(JSON.parse(localStorage.getItem('userTokenTime')));
+      localStorage.setItem('token', res.data.token);
+      const tokenDetails = JSON.parse(window.atob(res.data.token.split('.')[1]));
+      /* 
+        tokenDetails = {
+          email: "chirayu@gmail.com"
+          exp: 1588685136
+          firstName: "chirayu"
+          iat: 1588681536
+          lastName: "joshi"
+          userId: "5e9e106d7b3dc369d47cd929"
+        }
+      */
+      localStorage.setItem('firstName', tokenDetails["firstName"]);
+      localStorage.setItem('lastItem', tokenDetails["lastName"]);
+      localStorage.setItem('expiryTime', tokenDetails["exp"]);
       dispatch(signInSuccess());
     }).catch(err => {
       console.log(err);

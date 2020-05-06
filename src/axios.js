@@ -11,7 +11,7 @@ const axiosConfigs = (JSON.parse(localStorage.getItem('userTokenTime')) === null
   {
     baseURL: secrets.baseURL,
     headers: {
-      'Authorization': 'Bearer ' + JSON.parse(localStorage.getItem('userTokenTime')).token,
+      'Authorization': 'Bearer ' + localStorage.getItem('token'),
       'Content-Type': 'application/json; charset=utf-8'
     }
   }

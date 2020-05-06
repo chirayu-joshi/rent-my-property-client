@@ -9,13 +9,17 @@ import './index.css';
 import App from './containers/App';
 import signInReducer from './store/reducers/signIn';
 import signUpReducer from './store/reducers/signUp';
+import authReducer from './store/reducers/auth';
+import hostReducer from './store/reducers/host';
 import * as serviceWorker from './serviceWorker';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const rootReducer = combineReducers({
   signIn: signInReducer,
-  signUp: signUpReducer
+  signUp: signUpReducer,
+  auth: authReducer,
+  host: hostReducer
 })
 
 const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)));

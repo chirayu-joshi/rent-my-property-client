@@ -15,3 +15,7 @@ export {
   imageLoadedsignIn,
   clearSignInState
 } from './signIn';
+
+export {
+  checkAuth
+} from './auth';

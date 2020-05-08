@@ -11,7 +11,7 @@ class Page2 extends Component {
     return (
       <div className={styles.page}>
         <h1>How many guest can your place accomodate?</h1>
-        <p>Check that you have enough beds to accomodate all your guest comfortably</p>
+        <p>Check that you have enough beds to accomodate all your guest comfortably.</p>
 
         <Grid container>
           <Grid item xs={12} sm={9} xl={7}>

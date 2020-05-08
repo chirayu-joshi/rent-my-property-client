@@ -16,7 +16,7 @@
   height: 90vh;
   width: 100%;
   overflow-y: scroll;
-  padding-top: 25%;
+  padding-top: 24%;
   border-bottom: 1px solid #bbb;
 }
 
@@ -31,7 +31,16 @@
 }
 
 .page h1 {
-  margin-bottom: 16px;
+  margin-bottom: 8px;
+}
+
+.page fieldset>div {
+  padding-left: 12px;
+  margin-top: 10%;
+}
+
+.page fieldset label>span>span {
+  font-size: 1.1rem;
 }
 
 .formElement {

@@ -48,6 +48,7 @@ class Page1 extends Component {
 
         <Grid container>
           <Grid item xs={12} sm={9} xl={7}>
+
             <FormControl required className={styles.formElement}>
               <InputLabel>Property type</InputLabel>
               <Select 
@@ -72,6 +73,7 @@ class Page1 extends Component {
                 value={this.props.propertyArea !== 0 ? this.props.propertyArea : ''} />
               <FormHelperText>Please choose area of your property</FormHelperText>
             </FormControl>
+            
           </Grid>
         </Grid>
       </div>

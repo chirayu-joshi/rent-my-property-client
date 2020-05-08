@@ -28,5 +28,9 @@ export {
   increaseRooms,
   decreaseRooms,
   increaseBeds,
-  decreaseBeds
+  decreaseBeds,
+  addAmenity,
+  removeAmenity,
+  addFacility,
+  removeFacility
 } from './host';

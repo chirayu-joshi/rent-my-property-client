@@ -50,6 +50,30 @@ export const decreaseBeds = () => {
   }
 }
 // --------------------------------------
+export const addAmenity = amenity => {
+  return {
+    type: actionTypes.ADD_AMENITY,
+    amenity: amenity
+  }
+}
 
-
+export const removeAmenity = amenity => {
+  return {
+    type: actionTypes.REMOVE_AMENITY,
+    amenity: amenity
+  }
+}
 // --------------------------------------
+export const addFacility = facility => {
+  return {
+    type: actionTypes.ADD_FACILITY,
+    facility: facility
+  }
+}
+
+export const removeFacility = facility => {
+  return {
+    type: actionTypes.REMOVE_FACILITY,
+    facility: facility
+  }
+}

@@ -7,8 +7,7 @@ const formGridContainer = props =>
     direction="row"
     justify="center"
     alignItems="stretch"
-    spacing={3}
-    style={{width: '100%'}}>
+    spacing={3}>
     {props.children}
   </Grid>
 

@@ -14,14 +14,8 @@ import smartHomeSVG from '../../../../assets/illustrations/SVGs/smart_home.svg';
 
 class Step1 extends Component {
   state = {
-    currentPage: 2,
+    currentPage: 1,
     totalPages: 3,
-    // guestCapacity: 1,
-    // rooms: 0,
-    // beds: 0,
-    // bedrooms: 0,
-    // amenities: [],
-    // facilities: [],
     errors: {
       requiredFields: ''
     }
@@ -65,6 +59,13 @@ class Step1 extends Component {
     // parse value to int at last while submitting
     // check if propertyType is null or not while submitting
     console.log('finish btn clicked');
+    console.log(this.props.propertyArea);
+    console.log(this.props.propertyType);
+    console.log(this.props.guestCapacity);
+    console.log(this.props.rooms);
+    console.log(this.props.beds);
+    console.log(this.props.amenities);
+    console.log(this.props.facilities);
   }
 
   render() {
@@ -155,7 +156,9 @@ const mapStateToProps = state => {
     propertyType: state.host.propertyType,
     guestCapacity: state.host.guestCapacity,
     rooms: state.host.rooms,
-    beds: state.host.beds
+    beds: state.host.beds,
+    amenities: state.host.amenities,
+    facilities: state.host.facilities
   }
 }
 

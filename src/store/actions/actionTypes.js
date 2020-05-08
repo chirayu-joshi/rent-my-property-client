@@ -24,3 +24,7 @@ export const INC_ROOMS = 'INC_ROOMS';
 export const DEC_ROOMS = 'DEC_ROOMS';
 export const INC_BEDS = 'INC_BEDS';
 export const DEC_BEDS = 'DEC_BEDS';
+export const ADD_AMENITY = 'ADD_AMENITY';
+export const REMOVE_AMENITY = 'REMOVE_AMENITY';
+export const ADD_FACILITY = 'ADD_FACILITY';
+export const REMOVE_FACILITY = 'REMOVE_FACILITY';

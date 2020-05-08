@@ -1,7 +1,7 @@
 // import * as actionTypes from '../actions/actionTypes';
 
 const initialState = {
-  currentStep: 3
+  currentStep: 2
 }
 
 const reducer = (state=initialState, action) => {

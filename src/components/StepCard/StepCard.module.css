@@ -1,0 +1,19 @@
+.container {
+  margin: 50px 0;
+  position: relative;
+}
+
+.smallHeading {
+  font-weight: 900;
+  font-size: 0.7rem;
+}
+
+.heading2 {
+  font-weight: 500;
+}
+
+.editBtn, .addBtn {
+  position: absolute !important;
+  right: 0;
+  top: 0;
+}

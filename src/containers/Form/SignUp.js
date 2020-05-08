@@ -52,13 +52,13 @@ class SignUp extends Component {
     let errors = this.state.errors;
 
     switch (name) {
-      case 'firstname':
+      case 'firstName':
         errors.firstname =
           configs.name_regex.test(value)
             ? ''
             : 'First Name should only have characters from "A to Z" or "a to z". ';
         break;
-      case 'lastname':
+      case 'lastName':
         errors.lastname =
           configs.name_regex.test(value)
             ? ''
@@ -84,22 +84,19 @@ class SignUp extends Component {
   }
 
   render() {
-    let infoModal = null;
-    let errorMessage = '';
-    Object.values(this.state.errors).forEach(error => {
-      errorMessage += error;
-    });
-    if (errorMessage !== '') {
-      infoModal = <InfoModal loading={errorMessage !== ''} type="info">{errorMessage}</InfoModal>
-    }
     if (this.props.signUpSuccessful) {
       this.props.onClearSignUpState();
       return <Redirect to="/signIn" />
     }
+    let errorMessage = '';
+    Object.values(this.state.errors).forEach(error => {
+      errorMessage += error;
+    });
+    
     return (
       <div className={styles.container}>
         <InfoModal loading={this.props.isLoading} type="loading">Loading...</InfoModal>
-        {infoModal}
+        <InfoModal loading={errorMessage !== ''} type="info">{errorMessage}</InfoModal>
         <InfoModal loading={this.props.signUpFailed} type="error">Sign Up Failed</InfoModal>
         <form>
           <h1 className={styles.mainHeading}>

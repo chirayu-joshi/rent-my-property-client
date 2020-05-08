@@ -11,3 +11,10 @@ body {
   overflow: hidden;
   background-color: #f2f3f7;
 }
+
+a {
+  color: #1876D2;
+  text-decoration: none;
+  display: inline-block;
+  margin: 10px 0;
+}

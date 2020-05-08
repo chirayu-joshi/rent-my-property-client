@@ -1,5 +1,59 @@
 .container {
-  height: 100%;
   width: 100%;
+  height: 100%;
   overflow: hidden;
+}
+
+.gridContainer {
+  height: 100%;
+}
+
+.formContainer {
+  overflow: hidden;
+}
+
+.pageContainer {
+  height: 90vh;
+  width: 100%;
+  overflow-y: scroll;
+  padding-top: 25%;
+  border-bottom: 1px solid #bbb;
+}
+
+.pageContainer::-webkit-scrollbar {
+  width: 0;
+  background: transparent;
+}
+
+.page {
+  display: flex;
+  flex-direction: column;
+}
+
+.page h1 {
+  margin-bottom: 16px;
+}
+
+.formElement {
+  margin-top: 24px !important;
+  width: 100%;
+}
+
+.formElement p {
+  font-weight: 900;
+}
+
+.btnContainer {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-top: 10px;
+}
+
+.container .svgImg {
+  width: 40vw;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
 }

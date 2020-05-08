@@ -1,27 +1,41 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Edit, ArrowForward } from '@material-ui/icons';
+import { IconButton, Fab } from '@material-ui/core';
 
-// import styles from './StepCard.module.css';
+import styles from './StepCard.module.css';
 
 const stepCard = props => {
   let continueBtn = null;
-  let changeLink = null;
+  let changeBtn = null;
   let inlineStyles = {};
   if (props.step < props.currentStep) {
-    changeLink = <Link to={props.to}>Change</Link>;
+    changeBtn =
+      <IconButton 
+        color="secondary"
+        onClick={() => props.parentProps.history.push(props.to)}
+        className={styles.editBtn}>
+        <Edit />
+      </IconButton>
   } else if (props.step === props.currentStep) {
-    continueBtn = <button>Continue</button>;
+    continueBtn = 
+      <Fab 
+        color="secondary" 
+        className={styles.addBtn}
+        onClick={() => props.parentProps.history.push(props.to)}>
+        <ArrowForward />
+      </Fab>
   } else {
     inlineStyles = {
       opacity: "0.3"
     }
   }
   return (
-    <div style={inlineStyles}>
-      <h2>{props.title}</h2>
+    <div className={styles.container} style={inlineStyles}>
+      <h3 className={styles.smallHeading}>STEP {props.step}</h3>
+      <h2 className={styles.heading2}>{props.title}</h2>
       <p>{props.subtitle}</p>
       {continueBtn}
-      {changeLink}
+      {changeBtn}
     </div>
   )
 };

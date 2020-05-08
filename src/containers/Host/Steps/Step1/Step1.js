@@ -34,15 +34,14 @@ class Step1 extends Component {
     });
   }
 
-  nextBtnClickHandler = props => {
+  nextBtnClickHandler = () => {
+    let errors = this.state.errors;
     switch (this.state.currentPage) {
       case 1:
-        let errors = this.state.errors;
-        if (props.propertyArea !== 0 && props.propertyType !== '') {
+        if (this.props.propertyArea !== 0 && this.props.propertyType !== '') {
           errors.requiredFields = ''
           this.setState({
-            currentPage: this.state.currentPage < this.state.totalPages ?
-              this.state.currentPage + 1 : this.state.currentPage,
+            currentPage: this.state.currentPage + 1,
             errors
           });
         } else {
@@ -51,6 +50,11 @@ class Step1 extends Component {
             errors
           });
         }
+        break;
+      case 2:
+        this.setState({
+          currentPage: this.state.currentPage + 1
+        });
         break;
       default:
         break;
@@ -70,7 +74,7 @@ class Step1 extends Component {
         size="large"
         color="primary"
         endIcon={<NavigateNext />}
-        onClick={() => this.nextBtnClickHandler(this.props)}>
+        onClick={this.nextBtnClickHandler}>
         Next
       </Button>
     if (this.state.currentPage === this.state.totalPages) {
@@ -148,7 +152,10 @@ class Step1 extends Component {
 const mapStateToProps = state => {
   return {
     propertyArea: state.host.propertyArea,
-    propertyType: state.host.propertyType
+    propertyType: state.host.propertyType,
+    guestCapacity: state.host.guestCapacity,
+    rooms: state.host.rooms,
+    beds: state.host.beds
   }
 }
 

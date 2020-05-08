@@ -10,11 +10,16 @@ const counter = props =>
     <div className={styles.counter}>
       <h4>{props.title}</h4>
       <div className={styles.count}>
-        <IconButton color="primary">
-          <RemoveCircleOutlineOutlined fontSize="large" />
-        </IconButton>
-        {props.value}
-        <IconButton color="primary">
+        {props.value <= props.minValue ?
+          <IconButton disabled>
+            <RemoveCircleOutlineOutlined fontSize="large" />
+          </IconButton> :
+          <IconButton color="primary" onClick={props.subtract}>
+            <RemoveCircleOutlineOutlined fontSize="large" />
+          </IconButton>
+        }
+        <span className={styles.value}>{props.value}</span>
+        <IconButton color="primary" onClick={props.add}>
           <AddCircleOutlineOutlined fontSize="large" />
         </IconButton>
       </div>

@@ -18,3 +18,9 @@ export const CHECK_AUTH = 'CHECK_AUTH';
 // actions/host.js
 export const CHANGE_PROPERTY_AREA = 'CHANGE_PROPERTY_AREA';
 export const CHANGE_PROPERTY_TYPE = 'CHANGE_PROPERTY_TYPE';
+export const INC_GUEST_CAPACITY = 'INC_GUEST_CAPACITY';
+export const DEC_GUEST_CAPACITY = 'DEC_GUEST_CAPACITY';
+export const INC_ROOMS = 'INC_ROOMS';
+export const DEC_ROOMS = 'DEC_ROOMS';
+export const INC_BEDS = 'INC_BEDS';
+export const DEC_BEDS = 'DEC_BEDS';

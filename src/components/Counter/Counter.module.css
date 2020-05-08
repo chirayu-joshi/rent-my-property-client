@@ -1,3 +1,7 @@
+.container {
+  margin-top: 32px;
+}
+
 .container p {
   font-size: 1.15rem;
 }
@@ -6,4 +10,13 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.counter h4 {
+  font-size: 1.2rem;
+}
+
+.value {
+  font-size: 1.1rem;
+  padding: 0 7px;
 }

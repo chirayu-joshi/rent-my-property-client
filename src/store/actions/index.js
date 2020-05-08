@@ -22,5 +22,11 @@ export {
 
 export {
   changePropertyArea,
-  changePropertyType
+  changePropertyType,
+  increaseGuestCapacity,
+  decreaseGuestCapacity,
+  increaseRooms,
+  decreaseRooms,
+  increaseBeds,
+  decreaseBeds
 } from './host';

@@ -16,4 +16,5 @@ export const CLEAR_SIGNIN_STATE = 'CLEAR_SIGNIN_STATE';
 export const CHECK_AUTH = 'CHECK_AUTH';
 
 // actions/host.js
-
+export const CHANGE_PROPERTY_AREA = 'CHANGE_PROPERTY_AREA';
+export const CHANGE_PROPERTY_TYPE = 'CHANGE_PROPERTY_TYPE';

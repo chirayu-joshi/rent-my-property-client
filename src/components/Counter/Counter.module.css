@@ -1,0 +1,9 @@
+.container p {
+  font-size: 1.15rem;
+}
+
+.counter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

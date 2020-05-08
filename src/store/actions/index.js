@@ -19,3 +19,8 @@ export {
 export {
   checkAuth
 } from './auth';
+
+export {
+  changePropertyArea,
+  changePropertyType
+} from './host';

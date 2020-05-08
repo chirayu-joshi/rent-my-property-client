@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Grid, Hidden, Button } from '@material-ui/core';
 import { NavigateBefore, NavigateNext } from '@material-ui/icons'
 
@@ -13,19 +14,15 @@ import smartHomeSVG from '../../../../assets/illustrations/SVGs/smart_home.svg';
 
 class Step1 extends Component {
   state = {
-    currentPage: 1,
+    currentPage: 2,
     totalPages: 3,
-    propertyType: '',
-    propertyArea: 0,
-    guestCapacity: 0,
-    rooms: 0,
-    beds: 0,
-    bedrooms: 0,
-    amenities: [],
-    facilities: [],
+    // guestCapacity: 1,
+    // rooms: 0,
+    // beds: 0,
+    // bedrooms: 0,
+    // amenities: [],
+    // facilities: [],
     errors: {
-      propertyArea: '',
-      emptyInputs: '',
       requiredFields: ''
     }
   }
@@ -37,15 +34,12 @@ class Step1 extends Component {
     });
   }
 
-  nextBtnClickHandler = () => {
-    console.log(this.state);
+  nextBtnClickHandler = props => {
     switch (this.state.currentPage) {
       case 1:
         let errors = this.state.errors;
-        if (this.state.propertyArea !== 0 && 
-            this.state.propertyType !== '' && 
-            errors.propertyArea === '') {
-          errors.requiredFields = '';
+        if (props.propertyArea !== 0 && props.propertyType !== '') {
+          errors.requiredFields = ''
           this.setState({
             currentPage: this.state.currentPage < this.state.totalPages ?
               this.state.currentPage + 1 : this.state.currentPage,
@@ -64,30 +58,9 @@ class Step1 extends Component {
   }
 
   finishBtnClickHandler = () => {
-    console.log('finish btn clicked');
-  }
-
-  inputChangeHandler = event => {
-    // All int values will we stored as string,
-    // but while storing to central store, they will be parsed.
-    const { name, value } = event.target;
-    let errors = this.state.errors;
-    switch (name) {
-      case 'propertyArea':
-        errors.propertyArea =
-          isNaN(value)
-            ? 'Area can only be in digits. '
-            : ''
-        break;
-      default:
-        break;
-    }
-    this.setState({ errors, [name]: value });
-  }
-
-  onSubmitHandler = () => {
     // parse value to int at last while submitting
     // check if propertyType is null or not while submitting
+    console.log('finish btn clicked');
   }
 
   render() {
@@ -97,7 +70,7 @@ class Step1 extends Component {
         size="large"
         color="primary"
         endIcon={<NavigateNext />}
-        onClick={() => this.nextBtnClickHandler()}>
+        onClick={() => this.nextBtnClickHandler(this.props)}>
         Next
       </Button>
     if (this.state.currentPage === this.state.totalPages) {
@@ -119,29 +92,23 @@ class Step1 extends Component {
         inlineStyles = {
           opacity: 0.3
         };
-        Page = Page1;
+        Page = <Page1 />;
         imageSVG = townSVG;
         break;
       case 2:
-        Page = Page2;
+        Page = <Page2 />;
         imageSVG = choosingHouseSVG;
         break;
       case 3:
-        Page = Page3;
+        Page = <Page3 />;
         imageSVG = smartHomeSVG;
         break;
       default:
         break;
     }
-
-    let errorMessage = '';
-    Object.values(this.state.errors).forEach(error => {
-      errorMessage += error;
-    });
-
+    
     return (
       <div className={styles.container}>
-        <InfoModal loading={errorMessage !== ''} type="info">{errorMessage}</InfoModal>
         <InfoModal 
           loading={this.state.errors.requiredFields !== ''} 
           type="error">
@@ -153,7 +120,7 @@ class Step1 extends Component {
         <FormGridContainer>
           <Grid item xs={11} lg={4} className={styles.formContainer}>
             <div className={styles.pageContainer}>
-              <Page change={this.inputChangeHandler} />
+              {Page}
             </div>
             <div className={styles.btnContainer}>
               <Button
@@ -178,4 +145,11 @@ class Step1 extends Component {
   }
 }
 
-export default Step1;
+const mapStateToProps = state => {
+  return {
+    propertyArea: state.host.propertyArea,
+    propertyType: state.host.propertyType
+  }
+}
+
+export default connect(mapStateToProps)(Step1);

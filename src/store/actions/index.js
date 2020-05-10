@@ -21,6 +21,7 @@ export {
 } from './auth';
 
 export {
+  changeStep,
   changePropertyArea,
   changePropertyType,
   increaseGuestCapacity,

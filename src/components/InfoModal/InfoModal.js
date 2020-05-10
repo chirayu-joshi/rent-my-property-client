@@ -18,6 +18,9 @@ const infoModal = props => {
     case 'info':
       classes.push('infoModal__info');
       break
+    case 'success':
+      classes.push('infoModal__success');
+      break;
     default:
       break;
   }

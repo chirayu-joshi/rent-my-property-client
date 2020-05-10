@@ -1,5 +1,11 @@
 import * as actionTypes from './actionTypes';
 
+export const changeStep = () => {
+  return {
+    type: actionTypes.CHANGE_STEP
+  }
+}
+// --------------------------------------
 export const changePropertyType = input => {
   return {
     type: actionTypes.CHANGE_PROPERTY_TYPE,

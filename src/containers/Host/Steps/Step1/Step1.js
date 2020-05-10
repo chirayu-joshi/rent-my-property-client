@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Grid, Hidden, Button } from '@material-ui/core';
 import { NavigateBefore, NavigateNext } from '@material-ui/icons'
 
+import * as actions from '../../../../store/actions/index';
 import { Page1, Page2, Page3 } from '.';
 import AppBar from '../../../../components/AppBar/AppBar';
 import InfoModal from '../../../../components/InfoModal/InfoModal';
@@ -34,21 +35,14 @@ class Step1 extends Component {
       case 1:
         if (this.props.propertyArea !== 0 && this.props.propertyType !== '') {
           errors.requiredFields = ''
-          this.setState({
-            currentPage: this.state.currentPage + 1,
-            errors
-          });
+          this.setState({ currentPage: this.state.currentPage + 1, errors });
         } else {
           errors.requiredFields = 'Please fill out all input fields correctly. ';
-          this.setState({
-            errors
-          });
+          this.setState({ errors });
         }
         break;
       case 2:
-        this.setState({
-          currentPage: this.state.currentPage + 1
-        });
+        this.setState({ currentPage: this.state.currentPage + 1 });
         break;
       default:
         break;
@@ -56,16 +50,8 @@ class Step1 extends Component {
   }
 
   finishBtnClickHandler = () => {
-    // parse value to int at last while submitting
-    // check if propertyType is null or not while submitting
-    console.log('finish btn clicked');
-    console.log(this.props.propertyArea);
-    console.log(this.props.propertyType);
-    console.log(this.props.guestCapacity);
-    console.log(this.props.rooms);
-    console.log(this.props.beds);
-    console.log(this.props.amenities);
-    console.log(this.props.facilities);
+    this.props.nextStep();
+    this.props.history.push('/host');
   }
 
   render() {
@@ -91,7 +77,7 @@ class Step1 extends Component {
 
     let inlineStyles = {};
     let imageSVG = null;
-    let Page = null;
+    let Page = null;            
     switch (this.state.currentPage) {
       case 1:
         inlineStyles = {
@@ -162,4 +148,10 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps)(Step1);
+const mapDispatchToProps = dispatch => {
+  return {
+    nextStep: () => dispatch(actions.changeStep())
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Step1);

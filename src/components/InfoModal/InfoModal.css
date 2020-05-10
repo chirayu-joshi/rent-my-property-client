@@ -34,6 +34,12 @@
   border-left: 6px solid #25A2B8;
 }
 
-.infoModal__error>:first-child, .infoModal__info>:first-child {
+.infoModal__success {
+  border-left: 6px solid #47A846;
+}
+
+.infoModal__error>:first-child, 
+.infoModal__info>:first-child, 
+.infoModal__success>:first-child {
   display: none;
 }

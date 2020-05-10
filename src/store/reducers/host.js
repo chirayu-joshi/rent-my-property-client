@@ -11,6 +11,16 @@ const initialState = {
   facilities: []
 }
 // -----------------------------------
+const changeStep = (state, action) => {
+  if (state.currentStep < 4) {
+    return {
+      ...state,
+      currentStep: state.currentStep + 1
+    }
+  }
+  return {...state};
+}
+// -----------------------------------
 const changePropertyArea = (state, action) => {
   return {
     ...state,
@@ -118,6 +128,7 @@ const removeFacility = (state, action) => {
 // -----------------------------------
 const reducer = (state = initialState, action) => {
   switch (action.type) {
+    case actionTypes.CHANGE_STEP: return changeStep(state, action);
     case actionTypes.CHANGE_PROPERTY_AREA: return changePropertyArea(state, action);
     case actionTypes.CHANGE_PROPERTY_TYPE: return changePropertyType(state, action);
     case actionTypes.INC_GUEST_CAPACITY: return increaseGuestCapacity(state, action);

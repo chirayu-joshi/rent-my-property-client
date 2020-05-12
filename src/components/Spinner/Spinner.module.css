@@ -1,0 +1,35 @@
+@keyframes innerClass {
+  0% { transform: rotate(0deg) }
+  50% { transform: rotate(180deg) }
+  100% { transform: rotate(360deg) }
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  overflow: hidden;
+  background: transparent;
+}
+
+.innerClass {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform: translateZ(0) scale(1);
+  backface-visibility: hidden;
+  transform-origin: 0 0; 
+  overflow: hidden;
+}
+
+.innerClass div {
+  position: absolute;
+  animation: innerClass 1s linear infinite;
+  width: 40px;
+  height: 40px;
+  top: 5px;
+  left: 5px;
+  border-radius: 50%;
+  box-shadow: 0 3px 0 0 #e15b64;
+  transform-origin: 20px 21px;
+  box-sizing: content-box;
+}

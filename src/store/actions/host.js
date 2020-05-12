@@ -83,3 +83,17 @@ export const removeFacility = facility => {
     facility: facility
   }
 }
+// --------------------------------------
+export const changePropertyName = value => {
+  return {
+    type: actionTypes.CHANGE_PROPERTY_NAME,
+    value: value
+  }
+}
+
+export const changePropertyDesc = value => {
+  return {
+    type: actionTypes.CHANGE_PROPERTY_DESC,
+    value: value
+  }
+}

@@ -8,7 +8,9 @@ const initialState = {
   rooms: 1,
   beds: 2,
   amenities: [],
-  facilities: []
+  facilities: [],
+  propertyName: '',
+  propertyDescription: ''
 }
 // -----------------------------------
 const changeStep = (state, action) => {
@@ -126,6 +128,20 @@ const removeFacility = (state, action) => {
   }
 }
 // -----------------------------------
+const changePropertyName = (state, action) => {
+  return {
+    ...state,
+    propertyName: action.value
+  }
+}
+
+const changePropertyDesc = (state, action) => {
+  return {
+    ...state,
+    propertyDescription: action.value
+  }
+}
+// -----------------------------------
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.CHANGE_STEP: return changeStep(state, action);
@@ -141,6 +157,8 @@ const reducer = (state = initialState, action) => {
     case actionTypes.REMOVE_AMENITY: return removeAmenity(state, action);
     case actionTypes.ADD_FACILITY: return addFacility(state, action);
     case actionTypes.REMOVE_FACILITY: return removeFacility(state, action);
+    case actionTypes.CHANGE_PROPERTY_NAME: return changePropertyName(state, action);
+    case actionTypes.CHANGE_PROPERTY_DESC: return changePropertyDesc(state, action);
     default:
       return state;
   }

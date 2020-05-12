@@ -58,27 +58,11 @@ class InputImage extends Component {
     for (let i = 0; i < this.state.selectedImages.length; i++) {
       data.append('file', this.state.selectedImages[i]);
     }
-    // axios.post('http://127.0.0.1:3333/api/upload', data, {
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //     'Authorization': 'Bearer ' + JSON.parse(localStorage.getItem('userTokenTime')).token
-    //   }
-    // }, {
-    //   onUploadProgress: ProgressEvent => {
-    //     this.setState({
-    //       loaded: (ProgressEvent.loaded / ProgressEvent.total * 100)
-    //     });
-    //   }
-    // }).then(res => {
-    //   toast.success('Upload Successful');
-    // }).catch(err => {
-    //   toast.error(`Upload Fail with status: ${err.statusText}`);
-    // });
     axios.post(this.props.reqLink, data)
       .then(res => {
-        console.log(res);
         this.setState({ uploading: false, uploaded: true });
         setTimeout(() => this.setState({ uploaded: false }), 2000);
+        this.props.onSuccess();
       }).catch(err => {
         console.log(err);
         this.setState({ uploading: false, error: 'Upload Failed' });

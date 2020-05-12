@@ -7,6 +7,7 @@ import * as actions from '../../../../store/actions/index';
 import { Page1, Page2, Page3 } from '.';
 import styles from '../Steps.module.css';
 import AppBar from '../../../../components/AppBar/AppBar';
+import InfoModal from '../../../../components/InfoModal/InfoModal';
 import FormGridContainer from '../../../../components/FormGridContainer/FormGridContainer';
 import forSaleSVG from '../../../../assets/illustrations/SVGs/for_sale.svg';
 import locationPropertiesSVG from '../../../../assets/illustrations/SVGs/location_properties.svg';
@@ -14,7 +15,7 @@ import myLocationSVG from '../../../../assets/illustrations/SVGs/my_location.svg
 
 class Step2 extends Component {
   state = {
-    currentPage: 1,
+    currentPage: 3,
     totalPages: 3,
     errors: {
       requiredFields: ''
@@ -29,20 +30,19 @@ class Step2 extends Component {
   }
 
   nextBtnClickHandler = () => {
-    // let errors = this.state.errors;
+    let errors = this.state.errors;
     switch (this.state.currentPage) {
       case 1:
-        // if (this.props.propertyArea !== 0 && this.props.propertyType !== '') {
-        //   errors.requiredFields = ''
-        //   this.setState({ currentPage: this.state.currentPage + 1, errors });
-        // } else {
-        //   errors.requiredFields = 'Please fill out all input fields correctly. ';
-        //   this.setState({ errors });
-        // }
         this.setState({ currentPage: this.state.currentPage + 1 });
         break;
       case 2:
-        this.setState({ currentPage: this.state.currentPage + 1 });
+        if (this.props.propertyName) {
+          errors.requiredFields = ''
+          this.setState({ currentPage: this.state.currentPage + 1, errors });
+        } else {
+          errors.requiredFields = 'Please fill out all required fields correctly. ';
+          this.setState({ errors });
+        }
         break;
       default:
         break;
@@ -100,6 +100,11 @@ class Step2 extends Component {
 
     return (
       <div className={styles.container}>
+        <InfoModal 
+          loading={this.state.errors.requiredFields} 
+          type="error">
+          {this.state.errors.requiredFields}
+        </InfoModal>
         <AppBar exit="/host" parentProps={this.props}>
           Step 2: Set the scene
         </AppBar>
@@ -133,7 +138,8 @@ class Step2 extends Component {
 
 const mapStateToProps = state => {
   return {
-
+    propertyName: state.host.propertyName,
+    propertyDescription: state.host.propertyDescription
   }
 }
 

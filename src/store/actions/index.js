@@ -33,5 +33,7 @@ export {
   addAmenity,
   removeAmenity,
   addFacility,
-  removeFacility
+  removeFacility,
+  changePropertyName,
+  changePropertyDesc
 } from './host';

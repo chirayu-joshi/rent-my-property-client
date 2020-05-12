@@ -53,9 +53,10 @@ export const signIn = (email, password) => {
           userId: "5e9e106d7b3dc369d47cd929"
         }
       */
-      localStorage.setItem('firstName', tokenDetails["firstName"]);
-      localStorage.setItem('lastItem', tokenDetails["lastName"]);
-      localStorage.setItem('expiryTime', tokenDetails["exp"]);
+      localStorage.setItem('email', tokenDetails['email']);
+      localStorage.setItem('firstName', tokenDetails['firstName']);
+      localStorage.setItem('lastItem', tokenDetails['lastName']);
+      localStorage.setItem('expiryTime', tokenDetails['exp']);
       dispatch(signInSuccess());
     }).catch(err => {
       console.log(err);

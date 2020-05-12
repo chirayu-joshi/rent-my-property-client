@@ -104,3 +104,39 @@ export const setLocation = location => {
     location: location
   }
 }
+// --------------------------------------
+export const changeCountry = country => {
+  return {
+    type: actionTypes.CHANGE_COUNTRY,
+    country: country
+  }
+}
+// --------------------------------------
+export const changeState = state => {
+  return {
+    type: actionTypes.CHANGE_STATE,
+    state: state
+  }
+}
+// --------------------------------------
+export const changeCity = city => {
+  return {
+    type: actionTypes.CHANGE_CITY,
+    city: city
+  }
+}
+// --------------------------------------
+export const changeStreet = street => {
+  return {
+    type: actionTypes.CHANGE_STREET,
+    street: street
+  }
+}
+// --------------------------------------
+export const changeNumber = number => {
+  return {
+    type: actionTypes.CHANGE_NUMBER,
+    number: number
+  }
+}
+// --------------------------------------

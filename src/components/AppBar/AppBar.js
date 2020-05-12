@@ -1,5 +1,5 @@
 import React from 'react';
-import { AppBar, Toolbar, IconButton, Typography } from '@material-ui/core';
+import { AppBar, Toolbar, IconButton, Typography, Hidden } from '@material-ui/core';
 import { Home, ExitToApp } from '@material-ui/icons';
 
 const appBar = props => (
@@ -16,16 +16,26 @@ const appBar = props => (
         spacing={5}>
         {props.children}
       </Typography>
-      <Typography
-        variant="h6"
-        style={{ marginLeft: 'auto' }}>
-        Exit
-      </Typography>
-      <IconButton
-        color="inherit"
-        onClick={() => props.parentProps.history.push('/host')}>
-        <ExitToApp />
-      </IconButton>
+      <Hidden smDown>
+        <Typography
+          variant="h6"
+          style={{ marginLeft: 'auto' }}>
+          Exit
+        </Typography>
+        <IconButton
+          color="inherit"
+          onClick={() => props.parentProps.history.push('/host')}>
+          <ExitToApp />
+        </IconButton>
+      </Hidden>
+      <Hidden mdUp>
+        <IconButton
+          color="inherit"
+          style={{ marginLeft: 'auto' }}
+          onClick={() => props.parentProps.history.push('/host')}>
+          <ExitToApp />
+        </IconButton>
+      </Hidden>
     </Toolbar>
   </AppBar>
 );

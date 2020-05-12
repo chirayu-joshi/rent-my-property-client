@@ -52,10 +52,9 @@ class Page1 extends Component {
             <FormControl required className={styles.formElement}>
               <InputLabel>Property type</InputLabel>
               <Select 
-                onChange={e => 
-                this.props.onSelectChange(e.target.value)} 
+                onChange={e => this.props.onSelectChange(e.target.value)} 
                 value={this.props.propertyType}>
-                <MenuItem><em>None</em></MenuItem>
+                <MenuItem disabled><em>Select Property Type</em></MenuItem>
                 <MenuItem value="house">House</MenuItem>
                 <MenuItem value="flat">Flat</MenuItem>
                 <MenuItem value="hotel">Hotel</MenuItem>

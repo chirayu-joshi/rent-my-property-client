@@ -11,7 +11,12 @@ const initialState = {
   facilities: [],
   propertyName: '',
   propertyDescription: '',
-  location: { lat: 0, lon: 0 }
+  location: { lat: 0, lon: 0 },
+  country: '',
+  state: '',
+  city: '',
+  street: '',
+  number: ''
 }
 // -----------------------------------
 const changeStep = (state, action) => {
@@ -150,6 +155,41 @@ const setLocation = (state, action) => {
   }
 }
 // -----------------------------------
+const changeCountry = (state, action) => {
+  return {
+    ...state,
+    country: action.country
+  }
+}
+// -----------------------------------
+const changeState = (state, action) => {
+  return {
+    ...state, 
+    state: action.state
+  }
+}
+// -----------------------------------
+const changeCity = (state, action) => {
+  return {
+    ...state, 
+    city: action.city
+  }
+}
+// -----------------------------------
+const changeStreet = (state, action) => {
+  return {
+    ...state, 
+    street: action.street
+  }
+}
+// -----------------------------------
+const changeNumber = (state, action) => {
+  return {
+    ...state,
+    number: action.number
+  }
+}
+// -----------------------------------
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.CHANGE_STEP: return changeStep(state, action);
@@ -168,6 +208,11 @@ const reducer = (state = initialState, action) => {
     case actionTypes.CHANGE_PROPERTY_NAME: return changePropertyName(state, action);
     case actionTypes.CHANGE_PROPERTY_DESC: return changePropertyDesc(state, action);
     case actionTypes.SET_LOCATION: return setLocation(state, action);
+    case actionTypes.CHANGE_COUNTRY: return changeCountry(state, action);
+    case actionTypes.CHANGE_STATE: return changeState(state, action);
+    case actionTypes.CHANGE_CITY: return changeCity(state, action);
+    case actionTypes.CHANGE_STREET: return changeStreet(state, action);
+    case actionTypes.CHANGE_NUMBER: return changeNumber(state, action);
     default:
       return state;
   }

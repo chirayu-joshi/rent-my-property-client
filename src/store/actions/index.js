@@ -36,5 +36,10 @@ export {
   removeFacility,
   changePropertyName,
   changePropertyDesc,
-  setLocation
+  setLocation,
+  changeCountry,
+  changeState,
+  changeCity,
+  changeStreet,
+  changeNumber
 } from './host';

@@ -8,12 +8,12 @@ import styles from '../Steps.module.css';
 class Page2 extends Component {
   render() {
     return (
-      <div className={styles}>
+      <div className={styles.page}>
 
         <h1>Name Your Place</h1>
         <Grid container>
           <Grid item xs={12} sm={9} xl={7}>
-            <FormControl required style={{marginTop: '10px', width: '100%'}}>
+            <FormControl required style={{width: '100%'}}>
               <TextField
                 label="Listing title *"
                 onChange={e => this.props.onInputChange(e.target.value)}
@@ -30,7 +30,7 @@ class Page2 extends Component {
               label="Summary"
               multiline
               rows={4}
-              style={{marginTop: '5px', width: '100%'}}
+              style={{width: '100%'}}
               onChange={e => this.props.onTextAreaChange(e.target.value)}
               value={this.props.propertyDescription} />
           </Grid>

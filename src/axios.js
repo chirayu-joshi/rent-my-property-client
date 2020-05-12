@@ -1,7 +1,7 @@
 import axios from 'axios';
 import secrets from './secret';
 
-const axiosConfigs = (JSON.parse(localStorage.getItem('userTokenTime')) === null) ? 
+const axiosConfigs = (localStorage.getItem('token') === null) ? 
   {
     baseURL: secrets.baseURL,
     headers: {

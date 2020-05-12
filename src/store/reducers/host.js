@@ -10,7 +10,8 @@ const initialState = {
   amenities: [],
   facilities: [],
   propertyName: '',
-  propertyDescription: ''
+  propertyDescription: '',
+  location: { lat: 0, lon: 0 }
 }
 // -----------------------------------
 const changeStep = (state, action) => {
@@ -134,11 +135,18 @@ const changePropertyName = (state, action) => {
     propertyName: action.value
   }
 }
-
+// -----------------------------------
 const changePropertyDesc = (state, action) => {
   return {
     ...state,
     propertyDescription: action.value
+  }
+}
+// -----------------------------------
+const setLocation = (state, action) => {
+  return {
+    ...state,
+    location: action.location
   }
 }
 // -----------------------------------
@@ -159,6 +167,7 @@ const reducer = (state = initialState, action) => {
     case actionTypes.REMOVE_FACILITY: return removeFacility(state, action);
     case actionTypes.CHANGE_PROPERTY_NAME: return changePropertyName(state, action);
     case actionTypes.CHANGE_PROPERTY_DESC: return changePropertyDesc(state, action);
+    case actionTypes.SET_LOCATION: return setLocation(state, action);
     default:
       return state;
   }

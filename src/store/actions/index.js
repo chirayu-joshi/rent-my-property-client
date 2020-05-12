@@ -35,5 +35,6 @@ export {
   addFacility,
   removeFacility,
   changePropertyName,
-  changePropertyDesc
+  changePropertyDesc,
+  setLocation
 } from './host';

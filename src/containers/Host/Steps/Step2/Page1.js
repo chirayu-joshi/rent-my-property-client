@@ -20,7 +20,6 @@ class Page1 extends Component {
       .then(res => {
         res.data.forEach(imageDetails => {
           this.setState(prevState => ({
-            ...prevState,
             images: [
               ...prevState.images,
               {imageName: imageDetails.filename, imageId: imageDetails._id}
@@ -40,7 +39,6 @@ class Page1 extends Component {
         if (res.data) {
           res.data.forEach(imageDetails => {
             this.setState(prevState => ({
-              ...prevState,
               images: [
                 ...prevState.images,
                 {imageName: imageDetails.filename, imageId: imageDetails._id}

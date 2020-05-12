@@ -97,3 +97,10 @@ export const changePropertyDesc = value => {
     value: value
   }
 }
+// --------------------------------------
+export const setLocation = location => {
+  return {
+    type: actionTypes.SET_LOCATION,
+    location: location
+  }
+}

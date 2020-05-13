@@ -10,11 +10,10 @@ import {
   TextField
 } from '@material-ui/core';
 import { MyLocation } from '@material-ui/icons';
-import axios from 'axios';
+import axios from '../../../../axios';
 
 import styles from '../Steps.module.css';
 import * as actions from '../../../../store/actions/index';
-import configs from '../../../../configs';
 import secrets from '../../../../secret';
 import InfoModal from '../../../../components/InfoModal/InfoModal';
 
@@ -33,17 +32,20 @@ class Page3 extends Component {
           // get address from mapquest API
           this.setState({ errors: { location: '' } });
           this.props.setLocation({ lat: position.coords.latitude, lon: position.coords.longitude });
-          axios.get(configs.mapQuestApiUrl + '/geocoding/v1/reverse', {
-            params: {
-              key: secrets.mapQuestApiKey,
-              location: position.coords.latitude + ',' + position.coords.longitude
-            }
-          }).then(res => {
-            const data = res.data.results[0].locations[0];
-            this.props.changeCountry(data.adminArea1);
-            this.props.changeState(data.adminArea3);
-            this.props.changeCity(data.adminArea5);
-          });
+          /** Making http request from our https website will give CORS error.
+           * To solve it, send https request to our server, server will send 
+           * request to ipstack and return response from there.
+           * This will also protect our API key, as server would only have it.
+           */
+          axios.get(secrets.baseURL + '/api/ext/mapQuest/' + position.coords.latitude + ',' + position.coords.longitude)
+            .then(res => {
+              const data = res.data.results[0].locations[0];
+              this.props.changeCountry(data.adminArea1);
+              this.props.changeState(data.adminArea3);
+              this.props.changeCity(data.adminArea5);
+            }).catch(err => {
+              console.log('Error while fetching address from location.');
+            });
         },
         err => {
           switch (err.code) {
@@ -55,18 +57,16 @@ class Page3 extends Component {
                 }
               });
               setTimeout(() => this.setState({ errors: { location: '' } }), 5000);
-              axios.get(configs.ipstackUrl + '/check', {
-                params: {
-                  access_key: secrets.ipstackApiKey,
-                  fields: 'country_code,region_name,city,latitude,longitude'
-                }
-              }).then(res => {
-                const data = res.data;
-                this.props.changeCountry(data.country_code);
-                this.props.changeState(data.region_name);
-                this.props.changeCity(data.city);
-                this.props.setLocation({ lat: data.latitude, lon: data.longitude });
-              });
+              axios.get(secrets.baseURL + '/api/ext/ipstack')
+                .then(res => {
+                  const data = res.data;
+                  this.props.changeCountry(data.country_code);
+                  this.props.changeState(data.region_name);
+                  this.props.changeCity(data.city);
+                  this.props.setLocation({ lat: data.latitude, lon: data.longitude });
+                }).catch(err => {
+                  console.log('Error while fetching address from IP address');
+                });
               break;
             case err.POSITION_UNAVAILABLE:
               this.setState({

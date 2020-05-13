@@ -1,7 +1,7 @@
 import * as actionTypes from '../actions/actionTypes';
 
 const initialState = {
-  currentStep: 2,
+  currentStep: 3,
   propertyArea: 0,
   propertyType: '',
   guestCapacity: 1,

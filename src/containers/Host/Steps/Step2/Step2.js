@@ -137,7 +137,7 @@ class Step2 extends Component {
           </Grid>
           <Hidden mdDown>
             <Grid item lg={5}>
-              <img src={imageSVG} className={styles.svgImg} alt="town.svg" />
+              <img src={imageSVG} className={styles.svgImg} alt="svg" />
             </Grid>
           </Hidden>
         </FormGridContainer>

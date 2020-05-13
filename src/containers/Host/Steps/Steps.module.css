@@ -73,3 +73,15 @@
   border-radius: 10px;
   margin: 24px 0;
 }
+
+.switchContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px 20px;
+  border-radius: 5px;
+}
+
+.switchContainer:hover {
+  background-color: rgba(0, 0, 0, 0.02);
+}

@@ -43,5 +43,9 @@ export {
   changeStreet,
   changeNumber,
   changePrice,
-  changeSchedule
+  changeSchedule,
+  addRule,
+  removeRule,
+  addLanguage,
+  removeLanguage
 } from './host';

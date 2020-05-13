@@ -18,7 +18,9 @@ const initialState = {
   street: '',
   number: '',
   price: 0,
-  schedule: { checkIn: new Date(), checkOut: new Date() }
+  schedule: { checkIn: new Date(), checkOut: new Date() },
+  rules: [],
+  languages: []
 }
 // -----------------------------------
 const changeStep = (state, action) => {
@@ -209,6 +211,33 @@ const changeSchedule = (state, action) => {
   }
 }
 // -----------------------------------
+const addRule = (state, action) => {
+  return {
+    ...state,
+    rules: [...state.rules, action.rule]
+  }
+}
+
+const removeRule = (state, action) => {
+  return {
+    ...state,
+    rules: state.rules.filter(rule => rule !== action.rule)
+  }
+}
+// -----------------------------------
+const addLanguage = (state, action) => {
+  return {
+    ...state,
+    languages: [...state.languages, action.language]
+  }
+}
+
+const removeLanguage = (state, action) => {
+  return {
+    ...state,
+    languages: state.languages.filter(language => language !== action.language)
+  }
+}
 // -----------------------------------
 const reducer = (state = initialState, action) => {
   switch (action.type) {
@@ -235,6 +264,10 @@ const reducer = (state = initialState, action) => {
     case actionTypes.CHANGE_NUMBER: return changeNumber(state, action);
     case actionTypes.CHANGE_PRICE: return changePrice(state, action);
     case actionTypes.CHANGE_SCHEDULE: return changeSchedule(state, action);
+    case actionTypes.ADD_RULE: return addRule(state, action);
+    case actionTypes.REMOVE_RULE: return removeRule(state, action);
+    case actionTypes.ADD_LANGUAGE: return addLanguage(state, action);
+    case actionTypes.REMOVE_LANGUAGE: return removeLanguage(state, action);
     default:
       return state;
   }

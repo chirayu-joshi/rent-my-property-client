@@ -153,3 +153,31 @@ export const changeSchedule = schedule => {
     schedule: schedule
   }
 }
+// --------------------------------------
+export const addRule = rule => {
+  return {
+    type: actionTypes.ADD_RULE,
+    rule: rule
+  }
+}
+
+export const removeRule = rule => {
+  return {
+    type: actionTypes.REMOVE_RULE,
+    rule: rule
+  }
+}
+// --------------------------------------
+export const addLanguage = language => {
+  return {
+    type: actionTypes.ADD_LANGUAGE,
+    language: language
+  }
+}
+
+export const removeLanguage = language => {
+  return {
+    type: actionTypes.REMOVE_LANGUAGE,
+    language: language
+  }
+}

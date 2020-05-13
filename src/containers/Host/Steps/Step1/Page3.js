@@ -46,6 +46,7 @@ class Page3 extends Component {
   render() {
     return (
       <div className={styles.page}>
+
         <h1>What amenities do you offer?</h1>
         <p>These are amenities that guest usually expects.</p>
         <Grid container>
@@ -93,6 +94,7 @@ class Page3 extends Component {
             </FormControl>
           </Grid>
         </Grid>
+        
       </div>
     );
   }

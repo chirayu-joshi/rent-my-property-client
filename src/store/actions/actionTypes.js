@@ -39,3 +39,7 @@ export const CHANGE_STREET = 'CHANGE_STREET';
 export const CHANGE_NUMBER = 'CHANGE_NUMBER';
 export const CHANGE_PRICE = 'CHANGE_PRICE';
 export const CHANGE_SCHEDULE = 'CHANGE_SCHEDULE';
+export const ADD_RULE = 'ADD_RULE';
+export const REMOVE_RULE = 'REMOVE_RULE';
+export const ADD_LANGUAGE = 'ADD_LANGUAGE';
+export const REMOVE_LANGUAGE = 'REMOVE_LANGUAGE';

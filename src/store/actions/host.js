@@ -140,3 +140,16 @@ export const changeNumber = number => {
   }
 }
 // --------------------------------------
+export const changePrice = price => {
+  return {
+    type: actionTypes.CHANGE_PRICE,
+    price: price
+  }
+}
+// --------------------------------------
+export const changeSchedule = schedule => {
+  return {
+    type: actionTypes.CHANGE_SCHEDULE,
+    schedule: schedule
+  }
+}

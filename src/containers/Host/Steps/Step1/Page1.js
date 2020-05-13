@@ -69,7 +69,7 @@ class Page1 extends Component {
               <TextField 
                 label="Property area *" 
                 onChange={this.inputChangeHandler} 
-                value={this.props.propertyArea !== 0 ? this.props.propertyArea : ''} />
+                value={this.props.propertyArea ? this.props.propertyArea : ''} />
               <FormHelperText>Please choose area of your property</FormHelperText>
             </FormControl>
             

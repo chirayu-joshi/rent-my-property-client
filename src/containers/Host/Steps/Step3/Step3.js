@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Grid, Button, Hidden } from '@material-ui/core';
 import { NavigateBefore, NavigateNext } from '@material-ui/icons'
 
@@ -12,7 +13,7 @@ import checklistSVG from '../../../../assets/illustrations/SVGs/checklist.svg';
 
 class Step3 extends Component {
   state = {
-    currentPage: 1,
+    currentPage: 2,
     totalPages: 2,
     errors: {
       requiredFields: ''
@@ -27,10 +28,18 @@ class Step3 extends Component {
   }
 
   nextBtnClickHandler = () => {
-    // let errors = this.state.errors;
     switch (this.state.currentPage) {
       case 1:
-        this.setState({ currentPage: this.state.currentPage + 1 });
+        if (this.props.price <= 0) {
+          this.setState({
+            errors: { requiredFields: 'Please fill out fields correctly. ' }
+          });
+        } else {
+          this.setState({ 
+            currentPage: this.state.currentPage + 1,
+            errors: { requiredFields: '' }
+          });
+        }
         break;
       default:
         break;
@@ -120,4 +129,16 @@ class Step3 extends Component {
   }
 }
 
-export default Step3;
+const mapStateToProps = state => {
+  return {
+    price: state.host.price
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Step3);

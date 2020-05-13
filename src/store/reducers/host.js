@@ -16,7 +16,9 @@ const initialState = {
   state: '',
   city: '',
   street: '',
-  number: ''
+  number: '',
+  price: 0,
+  schedule: { checkIn: new Date(), checkOut: new Date() }
 }
 // -----------------------------------
 const changeStep = (state, action) => {
@@ -190,6 +192,24 @@ const changeNumber = (state, action) => {
   }
 }
 // -----------------------------------
+const changePrice = (state, action) => {
+  return {
+    ...state,
+    price: action.price
+  }
+}
+// -----------------------------------
+const changeSchedule = (state, action) => {
+  return {
+    ...state,
+    schedule: {
+      checkIn: action.schedule.checkIn,
+      checkOut: action.schedule.checkOut
+    }
+  }
+}
+// -----------------------------------
+// -----------------------------------
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.CHANGE_STEP: return changeStep(state, action);
@@ -213,6 +233,8 @@ const reducer = (state = initialState, action) => {
     case actionTypes.CHANGE_CITY: return changeCity(state, action);
     case actionTypes.CHANGE_STREET: return changeStreet(state, action);
     case actionTypes.CHANGE_NUMBER: return changeNumber(state, action);
+    case actionTypes.CHANGE_PRICE: return changePrice(state, action);
+    case actionTypes.CHANGE_SCHEDULE: return changeSchedule(state, action);
     default:
       return state;
   }

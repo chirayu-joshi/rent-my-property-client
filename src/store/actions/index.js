@@ -41,5 +41,7 @@ export {
   changeState,
   changeCity,
   changeStreet,
-  changeNumber
+  changeNumber,
+  changePrice,
+  changeSchedule
 } from './host';

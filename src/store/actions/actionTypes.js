@@ -37,3 +37,5 @@ export const CHANGE_STATE = 'CHANGE_STATE';
 export const CHANGE_CITY = 'CHANGE_CITY';
 export const CHANGE_STREET = 'CHANGE_STREET';
 export const CHANGE_NUMBER = 'CHANGE_NUMBER';
+export const CHANGE_PRICE = 'CHANGE_PRICE';
+export const CHANGE_SCHEDULE = 'CHANGE_SCHEDULE';

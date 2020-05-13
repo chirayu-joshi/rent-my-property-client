@@ -15,7 +15,7 @@ import myLocationSVG from '../../../../assets/illustrations/SVGs/my_location.svg
 
 class Step2 extends Component {
   state = {
-    currentPage: 3,
+    currentPage: 1,
     totalPages: 3,
     errors: {
       requiredFields: ''
@@ -40,8 +40,9 @@ class Step2 extends Component {
           errors.requiredFields = ''
           this.setState({ currentPage: this.state.currentPage + 1, errors });
         } else {
-          errors.requiredFields = 'Please fill out all required fields correctly. ';
-          this.setState({ errors });
+          this.setState({ 
+            errors: { requiredFields: 'Please fill out all required fields' } 
+          });
         }
         break;
       default:
@@ -50,8 +51,17 @@ class Step2 extends Component {
   }
 
   finishBtnClickHandler = () => {
-    this.props.nextStep();
-    this.props.history.push('/host');
+    if (this.props.country 
+      && this.props.state 
+      && this.props.city 
+      && this.props.street) {
+      this.props.nextStep();
+      this.props.history.push('/host');
+    } else {
+      this.setState({ 
+        errors: { requiredFields: 'Please fill out all required fields' } 
+      });
+    }
   }
 
   render() {
@@ -139,7 +149,13 @@ class Step2 extends Component {
 const mapStateToProps = state => {
   return {
     propertyName: state.host.propertyName,
-    propertyDescription: state.host.propertyDescription
+    propertyDescription: state.host.propertyDescription,
+    location: state.host.location,
+    country: state.host.country,
+    state: state.host.state,
+    city: state.host.city,
+    street: state.host.street,
+    number: state.host.number
   }
 }
 

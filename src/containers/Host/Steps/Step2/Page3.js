@@ -10,15 +10,26 @@ import {
   TextField
 } from '@material-ui/core';
 import { MyLocation } from '@material-ui/icons';
+import L from 'leaflet';
+import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
 import axios from '../../../../axios';
 
 import styles from '../Steps.module.css';
 import * as actions from '../../../../store/actions/index';
 import secrets from '../../../../secret';
 import InfoModal from '../../../../components/InfoModal/InfoModal';
+import locationIcon from '../../../../assets/icons/locationMark';
+
+const mapIcon = L.icon({
+  iconUrl: locationIcon,
+  iconSize: [25, 41],
+  iconAnchor: [12.5, 41],
+  popupAnchor: [0, -41]
+});
 
 class Page3 extends Component {
   state = {
+    zoom: 8,
     errors: {
       location: ''
     }
@@ -101,6 +112,11 @@ class Page3 extends Component {
     }
   }
 
+  mapDragHandler = e => {
+    const center = e.target.getCenter();
+    this.props.setLocation({ lat: center.lat, lon: center.lng });
+  }
+
   render() {
     return (
       <div className={styles.page}>
@@ -159,11 +175,24 @@ class Page3 extends Component {
 
         <h1 style={{ marginTop: '12%' }}>Is the pin in the right place?</h1>
         <p>If needed, you can adjust the map so the pin is in the right location.</p>
-        <Grid container>
-          <Grid item xs={12} sm={9} xl={7}>
-
-          </Grid>
-        </Grid>
+        <Map
+          center={[this.props.location.lat, this.props.location.lon]}
+          zoom={this.state.zoom}
+          onDrag={e => this.mapDragHandler(e)}
+          onZoomEnd={e => this.setState({ zoom: e.target._zoom })}
+          className={styles.map}>
+          <TileLayer
+            attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          />
+          <Marker
+            position={[this.props.location.lat, this.props.location.lon]}
+            icon={mapIcon}>
+            <Popup>
+              A pretty CSS3 popup. <br /> Easily customizable.
+            </Popup>
+          </Marker>
+        </Map>
 
       </div>
     );

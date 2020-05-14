@@ -1,7 +1,7 @@
 import * as actionTypes from '../actions/actionTypes';
 
 const initialState = {
-  currentStep: 3,
+  currentStep: 1,
   propertyArea: 0,
   propertyType: '',
   guestCapacity: 1,
@@ -239,6 +239,12 @@ const removeLanguage = (state, action) => {
   }
 }
 // -----------------------------------
+const clearStore = (state, action) => {
+  return {
+    state: initialState
+  }
+}
+// -----------------------------------
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.CHANGE_STEP: return changeStep(state, action);
@@ -268,6 +274,7 @@ const reducer = (state = initialState, action) => {
     case actionTypes.REMOVE_RULE: return removeRule(state, action);
     case actionTypes.ADD_LANGUAGE: return addLanguage(state, action);
     case actionTypes.REMOVE_LANGUAGE: return removeLanguage(state, action);
+    case actionTypes.CLEAR_STORE: return clearStore(state, action);
     default:
       return state;
   }

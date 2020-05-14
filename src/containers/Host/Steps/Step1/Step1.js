@@ -50,7 +50,9 @@ class Step1 extends Component {
   }
 
   finishBtnClickHandler = () => {
-    this.props.nextStep();
+    if (this.props.currentStep === 1) {
+      this.props.nextStep();
+    } // else: in edit mode.
     this.props.history.push('/host');
   }
 
@@ -144,7 +146,8 @@ const mapStateToProps = state => {
     rooms: state.host.rooms,
     beds: state.host.beds,
     amenities: state.host.amenities,
-    facilities: state.host.facilities
+    facilities: state.host.facilities,
+    currentStep: state.host.currentStep
   }
 }
 

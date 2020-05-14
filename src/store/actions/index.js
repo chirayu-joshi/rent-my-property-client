@@ -47,5 +47,6 @@ export {
   addRule,
   removeRule,
   addLanguage,
-  removeLanguage
+  removeLanguage,
+  clearStore
 } from './host';

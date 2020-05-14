@@ -43,3 +43,4 @@ export const ADD_RULE = 'ADD_RULE';
 export const REMOVE_RULE = 'REMOVE_RULE';
 export const ADD_LANGUAGE = 'ADD_LANGUAGE';
 export const REMOVE_LANGUAGE = 'REMOVE_LANGUAGE';
+export const CLEAR_STORE = 'CLEAR_STORE';

@@ -13,7 +13,7 @@ class Page2 extends Component {
         <h1>Name Your Place</h1>
         <Grid container>
           <Grid item xs={12} sm={9} xl={7}>
-            <FormControl required style={{width: '100%'}}>
+            <FormControl required style={{width: '100%'}} className={styles.formElement}>
               <TextField
                 label="Listing title *"
                 onChange={e => this.props.onInputChange(e.target.value)}

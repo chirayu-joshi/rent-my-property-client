@@ -5,6 +5,7 @@ import { NavigateBefore, NavigateNext } from '@material-ui/icons'
 
 import { Page1, Page2 } from '.';
 import styles from '../Steps.module.css';
+import * as actions from '../../../../store/actions/index';
 import AppBar from '../../../../components/AppBar/AppBar';
 import InfoModal from '../../../../components/InfoModal/InfoModal';
 import FormGridContainer from '../../../../components/FormGridContainer/FormGridContainer';
@@ -13,7 +14,7 @@ import checklistSVG from '../../../../assets/illustrations/SVGs/checklist.svg';
 
 class Step3 extends Component {
   state = {
-    currentPage: 2,
+    currentPage: 1,
     totalPages: 2,
     errors: {
       requiredFields: ''
@@ -47,7 +48,9 @@ class Step3 extends Component {
   }
 
   finishBtnClickHandler = () => {
-    // this.props.nextStep();
+    if (this.props.currentStep === 3) {
+      this.props.nextStep();
+    } // else: in edit mode.
     this.props.history.push('/host');
   }
 
@@ -131,13 +134,14 @@ class Step3 extends Component {
 
 const mapStateToProps = state => {
   return {
-    price: state.host.price
+    price: state.host.price,
+    currentStep: state.host.currentStep
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-
+    nextStep: () => dispatch(actions.changeStep())
   }
 }
 

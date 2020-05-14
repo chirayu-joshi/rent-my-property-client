@@ -55,7 +55,9 @@ class Step2 extends Component {
       && this.props.state 
       && this.props.city 
       && this.props.street) {
-      this.props.nextStep();
+      if (this.props.currentStep === 2) {
+        this.props.nextStep();
+      } // else: in edit mode.
       this.props.history.push('/host');
     } else {
       this.setState({ 
@@ -155,7 +157,8 @@ const mapStateToProps = state => {
     state: state.host.state,
     city: state.host.city,
     street: state.host.street,
-    number: state.host.number
+    number: state.host.number,
+    currentStep: state.host.currentStep
   }
 }
 

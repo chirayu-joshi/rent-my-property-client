@@ -181,3 +181,9 @@ export const removeLanguage = language => {
     language: language
   }
 }
+// --------------------------------------
+export const clearStore = () => {
+  return {
+    type: actionTypes.CLEAR_STORE
+  }
+}

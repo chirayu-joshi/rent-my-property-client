@@ -37,8 +37,8 @@ class SignIn extends Component {
       <div className={styles.container}>
         <InfoModal loading={this.props.isLoading} type="loading">Loading...</InfoModal>
         <InfoModal loading={this.props.signInFailed} type="error">Incorrect email or password</InfoModal>
+        <Logo />
         <div className={styles.imageContainer}>
-          <Logo />
           <img
             className={styles.mainImg}
             src={mainImg}

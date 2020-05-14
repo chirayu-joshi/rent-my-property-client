@@ -104,7 +104,7 @@ class SignUp extends Component {
           </h1>
           <p className={styles.tagLine}>Where luxury meets price</p>
           <hr className={styles.shortLine} />
-          <div style={{ marginTop: '100px' }}>
+          <div style={{ marginTop: '10%' }}>
             <FirstNameInput change={this.inputChangeHandler} />
             <LastNameInput change={this.inputChangeHandler} />
             <EmailInput change={this.inputChangeHandler} />
@@ -115,8 +115,8 @@ class SignUp extends Component {
             <Link to="/signIn">Sign In</Link>
           </ButtonContainer>
         </form>
+        <Logo />
         <div className={styles.imageContainer}>
-          <Logo />
           <img
             className={styles.mainImg}
             src={mainImg}

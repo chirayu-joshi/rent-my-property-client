@@ -1,0 +1,44 @@
+/*
+  light-green: #D2F1E7
+  dark-green: #46B174
+  gray: #7F8A8B
+  black: #29383E
+*/
+
+.dashboard {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+}
+
+.mapContainer {
+  width: 50vw;
+  height: 100vh;
+}
+
+.container {
+  width: 50vw;
+  height: 100vh;
+  box-shadow: -20px 0px 20px -9px rgba(0,0,0,0.25);
+  z-index: 9999;
+}
+
+.posts {
+  padding: 0px 5%;
+}
+
+.title {
+  color: #7F8A8B;
+  font-size: 1.9rem;
+  margin: 5px 0;
+  letter-spacing: 1.8px;
+}
+
+.title span {
+  color: #29383E;
+}
+
+.title .country {
+  color: #7F8A8B;
+  border-bottom: 1px solid #aaa;
+}

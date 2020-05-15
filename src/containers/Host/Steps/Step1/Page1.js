@@ -67,7 +67,7 @@ class Page1 extends Component {
 
             <FormControl required className={styles.formElement}>
               <TextField 
-                label="Property area *" 
+                label={'Property area (in sq.ft) *'}
                 onChange={this.inputChangeHandler} 
                 value={this.props.propertyArea ? this.props.propertyArea : ''} />
               <FormHelperText>Please choose area of your property</FormHelperText>

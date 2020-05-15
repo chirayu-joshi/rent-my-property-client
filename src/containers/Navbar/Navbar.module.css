@@ -1,0 +1,81 @@
+/*
+  #D2F1E7 - light
+  #46B174 - dark
+*/
+
+.nav {
+  height: 10%;
+  position: relative;
+}
+
+.hamburger {
+  position: absolute;
+  cursor: pointer;
+  left: 5%;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 3;
+}
+
+.hamburger>div {
+  width: 30px;
+  height: 2px;
+  background-color: black;
+  margin: 5px;
+}
+
+.navLinks {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  list-style: none;
+  height: 100%;
+  width: 50%;
+  background-color: #D2F1E7;
+  pointer-events: none;
+  clip-path: circle(0px at 8% 5%);
+  -webkit-clip-path: circle(0px at 8% 5%);
+  transition: all 1s ease-out;
+  z-index: 2;
+}
+
+.navLinksOpen {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  list-style: none;
+  height: 100%;
+  width: 50%;
+  background-color: #D2F1E7;
+  pointer-events: all;
+  clip-path: circle(1420px at 8% 5%);
+  -webkit-clip-path: circle(1420px at 8% 5%);
+  transition: all 1s ease-out;
+  z-index: 2;
+}
+
+.navLinks li a, .navLinksOpen li a {
+  color: #46B174;
+  font-size: 2rem;
+  margin: 24px 0;
+}
+
+.title {
+  font-family: 'Pacifico', cursive;
+  font-weight: 100;
+  position: absolute;
+  left: 45%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.buttons {
+  position: absolute;
+  right: 5%;
+  top: 50%;
+  transform: translateY(-50%);
+}

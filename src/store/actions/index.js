@@ -48,5 +48,13 @@ export {
   removeRule,
   addLanguage,
   removeLanguage,
-  clearStore
+  clearStore,
 } from './host';
+
+export {
+  initLocation,
+  setLocationFromIP,
+  setCountryFromIP,
+  fetchPostsByCountryCode,
+  setPosts
+} from './map';

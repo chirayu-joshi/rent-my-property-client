@@ -58,7 +58,7 @@ class Page1 extends Component {
           <ImageContainer 
             key={image.imageId}
             preImgHeight='200px' 
-            src={secrets.baseURL + '/api/images/' + image.imageName} /> 
+            src={secrets.baseURL + '/api/images/name/' + image.imageName} /> 
         ))
       : null;
     return (

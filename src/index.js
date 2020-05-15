@@ -12,6 +12,7 @@ import signInReducer from './store/reducers/signIn';
 import signUpReducer from './store/reducers/signUp';
 import authReducer from './store/reducers/auth';
 import hostReducer from './store/reducers/host';
+import mapReducer from './store/reducers/map';
 import * as serviceWorker from './serviceWorker';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -20,7 +21,8 @@ const rootReducer = combineReducers({
   signIn: signInReducer,
   signUp: signUpReducer,
   auth: authReducer,
-  host: hostReducer
+  host: hostReducer,
+  map: mapReducer
 })
 
 const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)));

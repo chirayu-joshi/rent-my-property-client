@@ -44,3 +44,10 @@ export const REMOVE_RULE = 'REMOVE_RULE';
 export const ADD_LANGUAGE = 'ADD_LANGUAGE';
 export const REMOVE_LANGUAGE = 'REMOVE_LANGUAGE';
 export const CLEAR_STORE = 'CLEAR_STORE';
+
+// actions/map.js
+export const INIT_LOCATION = 'INIT_LOCATION';
+export const SET_LOCATION_FROM_IP = 'SET_LOCATION_FROM_IP';
+export const SET_COUNTRY_FROM_IP = 'SET_COUNTRY_FROM_IP';
+export const FETCH_POSTS_BY_COUNTRY = 'FETCH_POSTS_BY_COUNTRY';
+export const SET_POSTS = 'SET_POSTS';

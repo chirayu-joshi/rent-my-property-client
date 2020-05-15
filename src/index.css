@@ -9,12 +9,17 @@ body {
   width: 100vw;
   height: 100vh;
   overflow: hidden;
-  background-color: #f2f3f7;
+  background-color: #fff;
 }
 
 a {
   color: #1876D2;
   text-decoration: none;
   display: inline-block;
-  margin: 10px 0;
+}
+
+/* leaflet styles */
+.leaflet-control {
+  margin-top: 20px !important;
+  margin-left: 20px !important;
 }

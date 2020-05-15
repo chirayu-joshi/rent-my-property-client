@@ -54,7 +54,7 @@ class Dashboard extends Component {
     this.props.initLocation()
       .then(res => {
         // Fetch Posts according to country location.
-        this.props.fetchPostsByCountryCode(res.countryCode);
+        this.props.fetchPostsByCountryCode(res.country_code);
       })
       .catch(err => {
         console.log(err);

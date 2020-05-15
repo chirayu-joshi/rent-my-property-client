@@ -1,7 +1,6 @@
-import axios from 'axios';
+import axios from '../../axios';
 
 import * as actionTypes from './actionTypes';
-import secrets from '../../secret';
 
 export const setLocationFromIP = location => {
   return {
@@ -27,7 +26,7 @@ export const setPosts = posts => {
 export const fetchPostsByCountryCode = countryCode => {
   return dispatch => {
     axios
-      .get(secrets.baseURL + '/api/stay/posts/' + countryCode)
+      .get('/api/stay/posts/' + countryCode)
       .then(res => {
         dispatch(setPosts(res.data.posts));
       })
@@ -41,10 +40,10 @@ export const initLocation = () => {
   return dispatch => {
     return new Promise((resolve, reject) => {
       axios
-        .get('http://ip-api.com/json')
+        .get('/api/stay/position')
         .then(res => {
-          dispatch(setLocationFromIP({ lat: res.data.lat, lon: res.data.lon }));
-          dispatch(setCountryFromIP(res.data.country));
+          dispatch(setLocationFromIP({ lat: res.data.latitude, lon: res.data.longitude }));
+          dispatch(setCountryFromIP(res.data.country_name));
           resolve(res.data);
         })
         .catch(err => {

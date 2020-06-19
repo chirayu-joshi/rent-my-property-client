@@ -16,6 +16,13 @@ export const setCountryFromIP = country => {
   }
 }
 
+export const setCountryCodeFromIP = countryCode => {
+  return {
+    type: actionTypes.SET_COUNTRY_CODE_FROM_IP,
+    countryCode: countryCode
+  }
+}
+
 export const setPosts = posts => {
   return {
     type: actionTypes.SET_POSTS,
@@ -36,6 +43,13 @@ export const fetchPostsByCountryCode = countryCode => {
   }
 }
 
+export const sortPosts = by => {
+  return {
+    type: actionTypes.SORT_POSTS,
+    by: by
+  }
+}
+
 export const initLocation = () => {
   return dispatch => {
     return new Promise((resolve, reject) => {
@@ -44,6 +58,7 @@ export const initLocation = () => {
         .then(res => {
           dispatch(setLocationFromIP({ lat: res.data.latitude, lon: res.data.longitude }));
           dispatch(setCountryFromIP(res.data.country_name));
+          dispatch(setCountryCodeFromIP(res.data.country_code));
           resolve(res.data);
         })
         .catch(err => {

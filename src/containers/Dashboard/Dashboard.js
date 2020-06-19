@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import L from 'leaflet';
 import { Map, Marker, Popup, TileLayer } from 'react-leaflet';
-import { Snackbar, IconButton } from '@material-ui/core';
+import { Snackbar, IconButton, Hidden, Grid } from '@material-ui/core';
 import { Close } from '@material-ui/icons';
 import axios from '../../axios';
 
@@ -13,6 +13,8 @@ import secrets from '../../secret';
 import locationIcon from '../../assets/icons/locationMark';
 import ImageContainer from '../ImageContainer/ImageContainer';
 import Navbar from '../Navbar/Navbar';
+import Filters from '../Filters/Filters';
+import Posts from '../Posts/Posts';
 
 const mapIcon = L.icon({
   iconUrl: locationIcon,
@@ -92,43 +94,52 @@ class Dashboard extends Component {
 
     return (
       <div className={styles.dashboard}>
+        <Grid container>
 
-        <div className={styles.mapContainer}>
-          <Map
-            center={[this.props.location.lat, this.props.location.lon]}
-            zoom={this.props.zoom}
-            style={{ width: '100%', height: '100%' }}>
-            <TileLayer
-              attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-            {markers}
-          </Map>
-          <Snackbar
-            anchorOrigin={{
-              vertical: 'bottom',
-              horizontal: 'left'
-            }}
-            open={this.state.snackbarOpen}
-            onClose={() => this.setState({ snackbarOpen: false })}
-            message="Click on markers for more info"
-            action={
-              <IconButton size="small" color="inherit" onClick={() => this.setState({ snackbarOpen: false })}>
-                <Close fontSize="small" />
-              </IconButton>
-            } />
-        </div>
+          <Hidden mdDown>
+            <Grid item lg={6}>
+              <div className={styles.mapContainer}>
+                <Map
+                  center={[this.props.location.lat, this.props.location.lon]}
+                  zoom={this.props.zoom}
+                  style={{ width: '100%', height: '100%' }}>
+                  <TileLayer
+                    attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+                  {markers}
+                </Map>
+                <Snackbar
+                  anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'left'
+                  }}
+                  open={this.state.snackbarOpen}
+                  onClose={() => this.setState({ snackbarOpen: false })}
+                  message="Click on markers for more info"
+                  action={
+                    <IconButton size="small" color="inherit" onClick={() => this.setState({ snackbarOpen: false })}>
+                      <Close fontSize="small" />
+                    </IconButton>
+                  } />
+              </div>
+            </Grid>
+          </Hidden>
 
-        <div className={styles.container}>
-          <Navbar />
-          <section className={styles.posts}>
-            <h2 className={styles.title}>
-              <span>{this.props.posts.length} Properties </span> 
-              in <span className={styles.country}>{this.props.country}</span>
-            </h2>
-            
-          </section>
-        </div>
+          <Grid item xs={12} lg={6} className={styles.containerWrapper}>
+            <div className={styles.container}>
+              <Navbar />
+              <section className={styles.posts}>
+                <h2 className={styles.title}>
+                  <span>{this.props.posts.length} Properties </span>
+                  in <span className={styles.country}>{this.props.country}</span>
+                </h2>
+                <Filters />
+                <Posts />
+              </section>
+            </div>
+          </Grid>
 
+        </Grid>
       </div>
     );
   }

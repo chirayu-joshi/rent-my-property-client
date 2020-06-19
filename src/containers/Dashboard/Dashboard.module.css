@@ -12,19 +12,24 @@
 }
 
 .mapContainer {
-  width: 50vw;
+  width: 100%;
   height: 100vh;
 }
 
-.container {
-  width: 50vw;
-  height: 100vh;
+.containerWrapper {
   box-shadow: -20px 0px 20px -9px rgba(0,0,0,0.25);
   z-index: 9999;
 }
 
+.container {
+  width: 100%;
+  height: 100vh;
+}
+
 .posts {
   padding: 0px 5%;
+  position: relative;
+  height: 90%;
 }
 
 .title {

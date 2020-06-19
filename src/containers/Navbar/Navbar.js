@@ -1,18 +1,10 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { NavLink, withRouter } from 'react-router-dom';
-import { Button } from '@material-ui/core';
-import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles'
-import { green } from '@material-ui/core/colors'
+import { Grid, Button, Hidden } from '@material-ui/core';
 
 import styles from './Navbar.module.css';
 import * as actions from '../../store/actions/index';
-
-const theme = createMuiTheme({
-  palette: {
-    primary: green
-  }
-});
 
 class Navbar extends Component {
   constructor(props) {
@@ -39,40 +31,47 @@ class Navbar extends Component {
           <div></div>
           <div></div>
         </div>
-        <ul className={this.state.navLinksOpen ? styles.navLinksOpen : styles.navLinks}>
-          <li><NavLink to="/">Home</NavLink></li>
-          <li><NavLink to="/host">Host</NavLink></li>
-          <li><NavLink to="/chat">Chats</NavLink></li>
-        </ul>
-        <h2 className={styles.title}>Rent My Property</h2>
-        <div className={styles.buttons}>
-          <ThemeProvider theme={theme}>
+        <Grid container>
+          <Grid item xs={12} lg={6}>
+            <ul className={this.state.navLinksOpen ? styles.navLinksOpen : styles.navLinks}>
+              <li><NavLink to="/">Home</NavLink></li>
+              <li><NavLink to="/host">Host</NavLink></li>
+              <li><NavLink to="/chat">Chats</NavLink></li>
+              <Hidden smUp>
+                <li><NavLink to="/signUp">Sign up</NavLink></li>
+                <li><NavLink to="/signIn">Login</NavLink></li>
+              </Hidden>
+            </ul>
+          </Grid>
+        </Grid>
+        <h2 className={styles.title}>
+          <Hidden smUp><div className={styles.space}></div></Hidden>Rent My Property
+        </h2>
+        <Hidden xsDown>
+          <div className={styles.buttons}>
             {this.props.isAuthenticated
               ? <Button
-                  variant="contained"
-                  color="primary"
-                  style={{ color: 'white', width: '100px' }}
-                  onClick={() => this.props.history.push('/signOut')}>
-                  Logout
+                variant="contained"
+                style={{ color: 'white', width: '100px', backgroundColor: '#46B174' }}
+                onClick={() => this.props.history.push('/signOut')}>
+                Logout
                 </Button>
               : <Fragment>
-                  <Button
-                    color="primary"
-                    style={{ width: '100px' }}
-                    onClick={() => this.props.history.push('/signUp')}>
-                    Sign up
+                <Button
+                  style={{ color: '#46B174', width: '100px' }}
+                  onClick={() => this.props.history.push('/signUp')}>
+                  Sign up
                   </Button>
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    style={{ color: 'white', width: '100px' }}
-                    onClick={() => this.props.history.push('/signIn')}>
-                    Login
+                <Button
+                  variant="contained"
+                  style={{ color: 'white', width: '100px', backgroundColor: '#46B174' }}
+                  onClick={() => this.props.history.push('/signIn')}>
+                  Login
                   </Button>
-                </Fragment>
+              </Fragment>
             }
-          </ThemeProvider>
-        </div>
+          </div>
+        </Hidden>
       </nav>
     );
   }

@@ -55,6 +55,8 @@ export {
   initLocation,
   setLocationFromIP,
   setCountryFromIP,
+  setCountryCodeFromIP,
   fetchPostsByCountryCode,
-  setPosts
+  setPosts,
+  sortPosts
 } from './map';

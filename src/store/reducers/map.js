@@ -4,7 +4,8 @@ const initialState = {
   location: { lat: 0, lon: 0 },
   zoom: 7,
   country: '',
-  posts: []
+  posts: [],
+  originalPosts: []
 }
 
 const setLocationFromIP = (state, action) => {
@@ -34,7 +35,8 @@ const setCountryCodeFromIP = (state, action) => {
 const setPosts = (state, action) => {
   return {
     ...state,
-    posts: action.posts
+    posts: action.posts,
+    originalPosts: action.posts
   }
 }
 
@@ -67,13 +69,48 @@ const sortPosts = (state, action) => {
   }
 }
 
-const reducer = (state=initialState, action) => {
+const filterPosts = (state, action) => {
+  const filters = action.filters;
+  const filteredPosts = state.originalPosts.filter(post => {
+    if (post.guestCapacity === filters.guestCapacity) {
+      if (filters.propertyType) {
+        if (post.propertyType !== filters.propertyType) {
+          return false;
+        }
+      }
+      if (filters.rangeValue[0] === 0 && filters.rangeValue[1] === 100) {
+        return true;
+      } else if (filters.rangeValue[0] === 0) {
+        if (post.price >= filters.rangeValue[1] * 1000) {
+          return false;
+        }
+      } else if (filters.rangeValue[1] === 100) {
+        if (post.price <= filters.rangeValue[0] * 1000) {
+          return false;
+        }
+      } else if (post.price <= filters.rangeValue[0] * 1000
+        || post.price >= filters.rangeValue[1] * 1000) {
+        return false;
+      }
+      return true;
+    } else {
+      return false;
+    }
+  });
+  return {
+    ...state,
+    posts: filteredPosts
+  }
+}
+
+const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.SET_LOCATION_FROM_IP: return setLocationFromIP(state, action);
     case actionTypes.SET_COUNTRY_FROM_IP: return setCountryFromIP(state, action);
     case actionTypes.SET_COUNTRY_CODE_FROM_IP: return setCountryCodeFromIP(state, action);
     case actionTypes.SET_POSTS: return setPosts(state, action);
     case actionTypes.SORT_POSTS: return sortPosts(state, action);
+    case actionTypes.FILTER_POSTS: return filterPosts(state, action);
     default: return state;
   }
 }

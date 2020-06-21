@@ -58,5 +58,6 @@ export {
   setCountryCodeFromIP,
   fetchPostsByCountryCode,
   setPosts,
-  sortPosts
+  sortPosts,
+  filterPosts
 } from './map';

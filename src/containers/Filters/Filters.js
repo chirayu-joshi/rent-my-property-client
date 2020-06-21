@@ -4,14 +4,18 @@ import {
   FormControl,
   InputLabel,
   Select,
-  Hidden,
   Button,
   Dialog,
   DialogTitle,
   DialogContent,
-  DialogActions
+  DialogActions,
+  IconButton
 } from '@material-ui/core';
-import { Tune } from '@material-ui/icons';
+import {
+  Tune,
+  AddCircleOutlineOutlined,
+  RemoveCircleOutlineOutlined
+} from '@material-ui/icons';
 
 import styles from './Filters.module.css';
 import * as actions from '../../store/actions/index';
@@ -19,12 +23,37 @@ import RangeSlider from '../../components/RangeSlider/RangeSlider';
 
 class Filters extends Component {
   state = {
-    filterDialogOpen: true,
-    rangeValue: [20, 60]
+    filterDialogOpen: false,
+    rangeValue: [20, 60],
+    guestCapacity: 3,
+    propertyType: ''
   }
 
   rangeChangeHandler = newValue => {
     this.setState({ rangeValue: newValue });
+  }
+
+  guestCapacityAddHandler = () => {
+    this.setState(prevState => ({
+      guestCapacity: prevState.guestCapacity + 1
+    }));
+  }
+
+  guestCapacitySubtractHandler = () => {
+    if (this.state.guestCapacity > 1) {
+      this.setState(prevState => ({
+        guestCapacity: prevState.guestCapacity - 1
+      }));
+    }
+  }
+
+  applyFilters = () => {
+    this.props.filterPosts({
+      rangeValue: this.state.rangeValue,
+      guestCapacity: this.state.guestCapacity,
+      propertyType: this.state.propertyType
+    });
+    this.setState({ filterDialogOpen: false });
   }
 
   render() {
@@ -60,19 +89,54 @@ class Filters extends Component {
 
     return (
       <div className={styles.filters}>
-        {
-          // guest capacity
-          // propertyType
-          // more (optional)
-        }
-        <Dialog open={this.state.filterDialogOpen} style={{ zIndex: '9999' }} fullWidth={true}>
+
+        <Dialog
+          open={this.state.filterDialogOpen}
+          style={{ zIndex: '9999' }}
+          fullWidth={true}>
           <DialogTitle>Filters</DialogTitle>
-          <DialogContent>
+          <DialogContent style={{ overflow: 'hidden' }}>
             <p>Price</p>
             <RangeSlider
               change={this.rangeChangeHandler}
               value={this.state.rangeValue}
               marks={marks} />
+            <div className={styles.counter}>
+              <p style={{ marginTop: '10px' }}>Guest Capacity</p>
+              <div>
+                {this.state.guestCapacity <= 1 ?
+                  <IconButton disabled>
+                    <RemoveCircleOutlineOutlined fontSize="large" />
+                  </IconButton> :
+                  <IconButton
+                    color="primary"
+                    onClick={() => this.guestCapacitySubtractHandler()}>
+                    <RemoveCircleOutlineOutlined fontSize="large" />
+                  </IconButton>
+                }
+                <span>{this.state.guestCapacity}</span>
+                <IconButton
+                  color="primary"
+                  onClick={() => this.guestCapacityAddHandler()}>
+                  <AddCircleOutlineOutlined fontSize="large" />
+                </IconButton>
+              </div>
+            </div>
+            <FormControl style={{ width: '100%' }}>
+              <InputLabel>Property type</InputLabel>
+              <Select
+                native
+                onChange={e => this.setState({ propertyType: e.target.value })}
+                value={this.props.propertyType}>
+                <option value="" />
+                <option value="house">House</option>
+                <option value="flat">Flat</option>
+                <option value="hotel">Hotel</option>
+                <option value="bungalow">Bungalow</option>
+                <option value="villa">Villa</option>
+                <option value="townhouse">Townhouse</option>
+              </Select>
+            </FormControl>
           </DialogContent>
           <DialogActions>
             <Button
@@ -84,7 +148,8 @@ class Filters extends Component {
             <Button
               variant="contained"
               color="primary"
-              style={{ width: '100px' }}>
+              style={{ width: '100px' }}
+              onClick={() => this.applyFilters()}>
               Apply
               </Button>
           </DialogActions>
@@ -92,9 +157,10 @@ class Filters extends Component {
 
         <Button
           size="large"
-          startIcon={<Tune />}>
+          startIcon={<Tune />}
+          onClick={() => this.setState({ filterDialogOpen: true })}>
           Filters
-          </Button>
+        </Button>
         <div>
           <FormControl variant="outlined">
             <InputLabel>Sort by</InputLabel>
@@ -122,7 +188,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    sortPosts: by => dispatch(actions.sortPosts(by))
+    sortPosts: by => dispatch(actions.sortPosts(by)),
+    filterPosts: filters => dispatch(actions.filterPosts(filters))
   }
 }
 

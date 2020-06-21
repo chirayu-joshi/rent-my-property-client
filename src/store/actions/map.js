@@ -50,6 +50,13 @@ export const sortPosts = by => {
   }
 }
 
+export const filterPosts = filters => {
+  return {
+    type: actionTypes.FILTER_POSTS,
+    filters: filters
+  }
+}
+
 export const initLocation = () => {
   return dispatch => {
     return new Promise((resolve, reject) => {

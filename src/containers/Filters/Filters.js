@@ -56,6 +56,11 @@ class Filters extends Component {
     this.setState({ filterDialogOpen: false });
   }
 
+  discardFilters = () => {
+    this.props.discardFilters();
+    this.setState({ filterDialogOpen: false });
+  }
+
   render() {
     let marks;
     if (this.props.countryCode) {
@@ -142,7 +147,7 @@ class Filters extends Component {
             <Button
               color="primary"
               style={{ width: '100px' }}
-              onClick={() => this.setState({ filterDialogOpen: false })}>
+              onClick={() => this.discardFilters()}>
               Discard
               </Button>
             <Button
@@ -189,7 +194,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     sortPosts: by => dispatch(actions.sortPosts(by)),
-    filterPosts: filters => dispatch(actions.filterPosts(filters))
+    filterPosts: filters => dispatch(actions.filterPosts(filters)),
+    discardFilters: () => dispatch(actions.resetPosts())
   }
 }
 

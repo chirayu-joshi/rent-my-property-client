@@ -57,6 +57,12 @@ export const filterPosts = filters => {
   }
 }
 
+export const resetPosts = () => {
+  return {
+    type: actionTypes.RESET_POSTS
+  }
+}
+
 export const initLocation = () => {
   return dispatch => {
     return new Promise((resolve, reject) => {

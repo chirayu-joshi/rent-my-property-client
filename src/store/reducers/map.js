@@ -103,6 +103,13 @@ const filterPosts = (state, action) => {
   }
 }
 
+const resetPosts = (state, actions) => {
+  return {
+    ...state,
+    posts: state.originalPosts
+  }
+}
+
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.SET_LOCATION_FROM_IP: return setLocationFromIP(state, action);
@@ -111,6 +118,7 @@ const reducer = (state = initialState, action) => {
     case actionTypes.SET_POSTS: return setPosts(state, action);
     case actionTypes.SORT_POSTS: return sortPosts(state, action);
     case actionTypes.FILTER_POSTS: return filterPosts(state, action);
+    case actionTypes.RESET_POSTS: return resetPosts(state, action);
     default: return state;
   }
 }

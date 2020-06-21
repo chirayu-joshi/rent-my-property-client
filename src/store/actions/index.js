@@ -59,5 +59,6 @@ export {
   fetchPostsByCountryCode,
   setPosts,
   sortPosts,
-  filterPosts
+  filterPosts,
+  resetPosts
 } from './map';

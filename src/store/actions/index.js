@@ -60,5 +60,6 @@ export {
   setPosts,
   sortPosts,
   filterPosts,
-  resetPosts
+  resetPosts,
+  zoomLocation
 } from './map';

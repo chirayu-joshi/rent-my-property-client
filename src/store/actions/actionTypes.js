@@ -55,3 +55,4 @@ export const SET_POSTS = 'SET_POSTS';
 export const SORT_POSTS = 'SORT_POSTS';
 export const FILTER_POSTS = 'FILTER_POSTS';
 export const RESET_POSTS = 'RESET_POSTS';
+export const ZOOM_LOCATION = 'ZOOM_LOCATION';

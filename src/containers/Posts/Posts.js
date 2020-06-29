@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Grid } from '@material-ui/core'
-import { PeopleOutline, StarBorder, CropLandscape } from '@material-ui/icons';
+import { PeopleOutline, StarBorder, AspectRatio } from '@material-ui/icons';
 
 import styles from './Posts.module.css';
 import secrets from '../../secret';
@@ -39,7 +39,7 @@ class Posts extends Component {
             <Grid item key={post._id} xs={12} sm={4} md={3} lg={6} xl={4}>
               <div
                 className={styles.post}
-                onClick={() => console.log('post clicked')}>
+                onClick={() => this.props.history.push('post/' + post._id)}>
                 <div className={styles.img}>
                   <ImageContainer
                     src={secrets.baseURL + '/api/images/id/' + post.imageIds[0]}
@@ -59,7 +59,7 @@ class Posts extends Component {
                       <span>{calStars(post.reviews)}</span>
                     </div>
                     <div className={styles.pArea}>
-                      <CropLandscape fontSize="small" />
+                      <AspectRatio fontSize="small" />
                       <span>{post.propertyArea} ft<sup>2</sup></span>
                     </div>
                   </div>

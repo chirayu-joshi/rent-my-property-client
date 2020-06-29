@@ -110,6 +110,14 @@ const resetPosts = (state, actions) => {
   }
 }
 
+const zoomLocation = (state, action) => {
+  return {
+    ...state,
+    zoom: 15,
+    location: { lat: action.location.lat, lon: action.location.lon }
+  }
+}
+
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.SET_LOCATION_FROM_IP: return setLocationFromIP(state, action);
@@ -119,6 +127,7 @@ const reducer = (state = initialState, action) => {
     case actionTypes.SORT_POSTS: return sortPosts(state, action);
     case actionTypes.FILTER_POSTS: return filterPosts(state, action);
     case actionTypes.RESET_POSTS: return resetPosts(state, action);
+    case actionTypes.ZOOM_LOCATION: return zoomLocation(state, action);
     default: return state;
   }
 }

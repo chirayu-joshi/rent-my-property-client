@@ -11,11 +11,11 @@ import PageNotFound from '../components/PageNotFound/PageNotFound';
 function App() {
   return (
     <Switch>
-      <Route exact path="/" component={Dashboard} />
       <Route path="/host" component={Host} />
       <Route exact path="/signIn" component={SignIn} />
       <Route exact path="/signUp" component={SignUp} />
       <Route exact path="/signOut" component={SignOut} />
+      <Route path="/" component={Dashboard} />
       <Route render={PageNotFound} />
     </Switch>
   );

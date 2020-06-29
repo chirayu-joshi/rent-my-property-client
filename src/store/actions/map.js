@@ -63,6 +63,13 @@ export const resetPosts = () => {
   }
 }
 
+export const zoomLocation = location => {
+  return {
+    type: actionTypes.ZOOM_LOCATION,
+    location: location
+  }
+}
+
 export const initLocation = () => {
   return dispatch => {
     return new Promise((resolve, reject) => {

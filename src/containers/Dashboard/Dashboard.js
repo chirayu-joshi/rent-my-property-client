@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import L from 'leaflet';
 import { Map, Marker, Popup, TileLayer } from 'react-leaflet';
@@ -10,11 +10,13 @@ import axios from '../../axios';
 import styles from './Dashboard.module.css';
 import * as actions from '../../store/actions/index';
 import secrets from '../../secret';
+import InfoModal from '../../components/InfoModal/InfoModal';
 import locationIcon from '../../assets/icons/locationMark';
 import ImageContainer from '../ImageContainer/ImageContainer';
 import Navbar from '../Navbar/Navbar';
 import Filters from '../Filters/Filters';
 import Posts from '../Posts/Posts';
+import Post from '../Post/Post';
 
 const mapIcon = L.icon({
   iconUrl: locationIcon,
@@ -38,18 +40,26 @@ class Dashboard extends Component {
   // so it is managed locally in local state.
   state = {
     markersData: [],
-    snackbarOpen: true
+    snackbarOpen: true,
+    fetchingMarkers: false,
+    errorOccured: false
   }
 
   componentDidMount() {
+    this.setState({ fetchingMarkers: true });
     // Markers are shown worldwide. Post are shown by country.
     axios
       .get('/api/stay/markers')
       .then(res => {
-        this.setState({ markersData: res.data.markersData });
+        this.setState({
+          markersData: res.data.markersData,
+          fetchingMarkers: false
+        });
       })
       .catch(err => {
         console.log(err);
+        this.setState({ errorOccured: true, fetchingMarkers: false });
+        setTimeout(() => this.setState({ errorOccured: false }), 5000);
       });
 
     // Country and Location both are initialised by initLocation()
@@ -83,7 +93,7 @@ class Dashboard extends Component {
                 <h3>{markerData.price + ' ' + getCurrency(markerData.address.country)}</h3>
                 <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                   <span>{markerData.propertyArea}<span> ft<sup>2</sup></span></span>
-                  <Link to="" style={{ margin: '2px', textDecoration: 'underline' }}>more</Link>
+                  <Link to={'post/' + markerData._id} style={{ margin: '2px', textDecoration: 'underline' }}>more</Link>
                 </div>
               </div>
             </div>
@@ -94,6 +104,16 @@ class Dashboard extends Component {
 
     return (
       <div className={styles.dashboard}>
+        <InfoModal
+          loading={this.state.fetchingMarkers}
+          type="loading">
+          Fetching markers...
+        </InfoModal>
+        <InfoModal
+          loading={this.state.errorOccured}
+          type="error">
+          Something went wrong
+        </InfoModal>
         <Grid container>
 
           <Hidden mdDown>
@@ -129,12 +149,16 @@ class Dashboard extends Component {
             <div className={styles.container}>
               <Navbar />
               <section className={styles.posts}>
-                <h2 className={styles.title}>
-                  <span>{this.props.posts.length} Properties </span>
-                  in <span className={styles.country}>{this.props.country}</span>
-                </h2>
-                <Filters />
-                <Posts />
+                <Route exact path='/post/:id' component={Post} />
+                <Route exact path='/' render={
+                  () =>
+                    <h2 className={styles.title}>
+                      <span>{this.props.posts.length} Properties </span>
+                    in <span className={styles.country}>{this.props.country}</span>
+                    </h2>
+                } />
+                <Route exact path='/' component={Filters} />
+                <Route exact path='/' component={Posts} />
               </section>
             </div>
           </Grid>

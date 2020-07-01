@@ -70,7 +70,7 @@
 }
 
 .pArea {
-  flex: 2;
+  flex: 1;
 }
 
 @media (max-width: 600px) {

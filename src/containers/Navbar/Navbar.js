@@ -21,6 +21,8 @@ class Navbar extends Component {
     }));
   }
 
+  closeNav = () => this.setState({ navLinksOpen: false });
+
   render() {
     return (
       <nav className={styles.nav}>
@@ -34,9 +36,9 @@ class Navbar extends Component {
         <Grid container>
           <Grid item xs={12} lg={6}>
             <ul className={this.state.navLinksOpen ? styles.navLinksOpen : styles.navLinks}>
-              <li><NavLink to="/">Home</NavLink></li>
-              <li><NavLink to="/host">Host</NavLink></li>
-              <li><NavLink to="/chat">Chats</NavLink></li>
+              <li onClick={this.closeNav}><NavLink to="/">Home</NavLink></li>
+              <li onClick={this.closeNav}><NavLink to="/host">Host</NavLink></li>
+              <li onClick={this.closeNav}><NavLink to="/chat">Chats</NavLink></li>
               <Hidden smUp>
                 <li><NavLink to="/signUp">Sign up</NavLink></li>
                 <li><NavLink to="/signIn">Login</NavLink></li>

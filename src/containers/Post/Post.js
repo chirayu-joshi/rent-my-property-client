@@ -28,6 +28,7 @@ import secrets from '../../secret';
 import styles from './Post.module.css';
 import InfoModal from '../../components/InfoModal/InfoModal';
 import ImageContainer from '../ImageContainer/ImageContainer';
+import ReviewInput from '../../components/ReviewInput/ReviewInput';
 
 const getCountry = countryCode => {
   switch (countryCode) {
@@ -63,42 +64,72 @@ class Post extends Component {
   state = {
     post: {},
     fetchingPost: false,
-    errorOccured: false
+    sendingReview: false,
+    errorOccured: false,
+    starHoverState: 0,
+    reviewStars: 0,
+    reviewInput: '',
+    reviews: []
+  }
+
+  reviewStarsChangeHandler = rating => {
+    this.setState({ reviewStars: rating });
+  }
+
+  reviewInputChangeHandler = review => {
+    this.setState({ reviewInput: review });
+  }
+
+  starHoverStateChangeHandler = rating => {
+    this.setState({ starHoverState: rating });
+  }
+
+  submitReviewHandler = () => {
+    if (this.state.reviewInput !== '') {
+      this.setState({ sendingReview: true });
+      const data = {
+        stars: this.state.reviewStars,
+        review: this.state.reviewInput,
+        postId: this.state.post._id
+      }
+      axios
+        .post('/api/stay/post/review', data)
+        .then(res => {
+          this.setState({
+            sendingReview: false,
+            reviewStars: 0,
+            reviewInput: '',
+            reviews: res.data.updatedReviews
+          });
+        })
+        .catch(err => {
+          this.setState({ errorOccured: true });
+          setTimeout(() => this.setState({ errorOccured: false }), 5000);
+          console.log(err);
+        });
+    }
   }
 
   componentDidMount() {
     this.setState({ fetchingPost: true });
     axios
-      .get(`/api/stay/post/${this.props.match.params.id}`)
+      .get(`/api/stay/posts/id/${this.props.match.params.id}`)
       .then(res => {
-        /*
-          post:
-            reviews: []
-            rules: (3) ["pets", "events", "children"]
-            languages: (2) ["english", "hindi"]
-            facilities: (3) ["parking", "washingMachine", "kitchen"]
-            amenities: (3) ["wifi", "tv", "desk"]
-            address: {number: "404", street: "Abcd road", city: "Navsari", state: "Gujarat", country: "IN"}
-            schedule: {checkIn: "2020-05-20T11:18:00.000Z", checkOut: "2020-05-31T11:18:00.000Z"}
-            beds: 4
-            rooms: 2
-            guestCapacity: 4
-            propertyArea: 1234
-            propertyType: "bungalow"
-            price: 60000
-            imageIds: (2) ["5ebfcc7a8906512216ecd056", "5ebfcc7a8906512216ecd057"]
-            location: {lat: 20.95077921328728, lon: 72.95333965361696}
-            propertyDescription: "This is my bungalow located near sea area, nice place to live."
-            propertyName: "My big bungalow"
-            uploaderId: "5ebabbb64820cb0017310d73"
-            __v: 0
-            _id: "5ebfcd7e8906512216ecd05d"
-        */
         this.setState({
           post: res.data.post,
           fetchingPost: false
         });
         this.props.zoomLocation(res.data.post.location);
+      })
+      .then(res => {
+        axios
+          .get('/api/stay/post/reviews/' + this.props.match.params.id)
+          .then(res => {
+            this.setState({ reviews: res.data.reviews });
+          })
+          .catch(err => {
+            console.log('get request error: ' + err);
+          });
       })
       .catch(err => {
         console.log(err);
@@ -108,6 +139,8 @@ class Post extends Component {
   }
 
   render() {
+    console.log(this.state.reviews);
+
     let addressString = '';
     for (const addressKey in this.state.post.address) {
       if (addressKey === 'country') {
@@ -195,6 +228,11 @@ class Post extends Component {
           type="error">
           Something went wrong
         </InfoModal>
+        <InfoModal
+          loading={this.state.sendingReview}
+          type="loading">
+          Sending review...
+        </InfoModal>
 
         <OwlCarousel
           loop
@@ -267,10 +305,27 @@ class Post extends Component {
         <p className={styles.description}>In order to stay, you must accept these rules:</p>
         {rules}
 
-        <div style={{ height: '30px', width: '100%' }}></div>
+        <h2 className={styles.heading}>Reviews</h2>
+        {this.props.isAuthenticated
+          ? <ReviewInput
+            changed={this.reviewInputChangeHandler}
+            rating={this.state.reviewStars}
+            reviewInput={this.state.reviewInput}
+            hoverState={this.state.starHoverState}
+            setRating={this.reviewStarsChangeHandler}
+            setHoverState={this.starHoverStateChangeHandler}
+            reviewChange={this.reviewInputChangeHandler}
+            submitReview={this.submitReviewHandler} />
+          : <p style={{ color: '#f77' }}>Please Login to add review</p>}
 
       </div>
     );
+  }
+}
+
+const mapStateToProps = state => {
+  return {
+    isAuthenticated: state.auth.isAuthenticated
   }
 }
 
@@ -280,4 +335,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(null, mapDispatchToProps)(Post);
+export default connect(mapStateToProps, mapDispatchToProps)(Post);

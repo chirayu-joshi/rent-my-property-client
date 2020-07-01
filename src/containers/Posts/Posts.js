@@ -26,7 +26,7 @@ const calStars = reviews => {
     reviews.forEach(review => {
       starSum += review.stars
     });
-    return starSum / totalReviews;
+    return parseFloat(starSum / totalReviews).toFixed(1);
   }
 }
 

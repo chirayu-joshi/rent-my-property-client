@@ -4,6 +4,7 @@ import { NavLink, withRouter } from 'react-router-dom';
 import { Grid, Button, Hidden } from '@material-ui/core';
 
 import styles from './Navbar.module.css';
+import logoText from '../../assets/logo/logo_text.png';
 import * as actions from '../../store/actions/index';
 
 class Navbar extends Component {
@@ -46,9 +47,7 @@ class Navbar extends Component {
             </ul>
           </Grid>
         </Grid>
-        <h2 className={styles.title}>
-          <Hidden smUp><div className={styles.space}></div></Hidden>Rent My Property
-        </h2>
+        <img src={logoText} alt="logo text" className={styles.logoText} />
         <Hidden xsDown>
           <div className={styles.buttons}>
             {this.props.isAuthenticated

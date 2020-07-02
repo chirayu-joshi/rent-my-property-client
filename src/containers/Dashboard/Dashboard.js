@@ -46,21 +46,23 @@ class Dashboard extends Component {
   }
 
   componentDidMount() {
-    this.setState({ fetchingMarkers: true });
-    // Markers are shown worldwide. Post are shown by country.
-    axios
-      .get('/api/stay/markers')
-      .then(res => {
-        this.setState({
-          markersData: res.data.markersData,
-          fetchingMarkers: false
+    if (window.screen.width >= 1280) {
+      this.setState({ fetchingMarkers: true });
+      // Markers are shown worldwide. Post are shown by country.
+      axios
+        .get('/api/stay/markers')
+        .then(res => {
+          this.setState({
+            markersData: res.data.markersData,
+            fetchingMarkers: false
+          });
+        })
+        .catch(err => {
+          console.log(err);
+          this.setState({ errorOccured: true, fetchingMarkers: false });
+          setTimeout(() => this.setState({ errorOccured: false }), 5000);
         });
-      })
-      .catch(err => {
-        console.log(err);
-        this.setState({ errorOccured: true, fetchingMarkers: false });
-        setTimeout(() => this.setState({ errorOccured: false }), 5000);
-      });
+    }
 
     // Country and Location both are initialised by initLocation()
     this.props.initLocation()

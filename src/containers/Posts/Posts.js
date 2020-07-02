@@ -67,6 +67,10 @@ class Posts extends Component {
               </div>
             </Grid>
           ))}
+          {this.props.originalPosts.length !== 0 && this.props.posts.length === 0
+            ? <p style={{ color: '#f66', padding: '10px' }}>No post found</p>
+            : null
+          }
         </Grid>
       </div>
     );
@@ -76,6 +80,7 @@ class Posts extends Component {
 const mapStateToProps = state => {
   return {
     posts: state.map.posts,
+    originalPosts: state.map.originalPosts,
     countryCode: state.map.countryCode
   }
 }

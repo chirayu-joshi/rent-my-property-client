@@ -29,6 +29,7 @@ import styles from './Post.module.css';
 import InfoModal from '../../components/InfoModal/InfoModal';
 import ImageContainer from '../ImageContainer/ImageContainer';
 import ReviewInput from '../../components/ReviewInput/ReviewInput';
+import Reviews from '../../components/Reviews/Reviews';
 
 const getCountry = countryCode => {
   switch (countryCode) {
@@ -139,8 +140,6 @@ class Post extends Component {
   }
 
   render() {
-    console.log(this.state.reviews);
-
     let addressString = '';
     for (const addressKey in this.state.post.address) {
       if (addressKey === 'country') {
@@ -316,7 +315,9 @@ class Post extends Component {
             setHoverState={this.starHoverStateChangeHandler}
             reviewChange={this.reviewInputChangeHandler}
             submitReview={this.submitReviewHandler} />
-          : <p style={{ color: '#f77' }}>Please Login to add review</p>}
+          : <p style={{ color: '#f66', margin: '7px 0', }}>Please Login to add review</p>}
+
+        <Reviews reviews={this.state.reviews} />
 
       </div>
     );

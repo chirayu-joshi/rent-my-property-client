@@ -1,0 +1,41 @@
+.reviewCount {
+  color: #29383E;
+  margin: 16px 0;
+}
+
+.reviewBox {
+  border: 5px;
+  display: flex;
+  margin-bottom: 16px;
+}
+
+.profilePic {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  color: white;
+  background-color: deeppink;
+  text-align: center;
+  line-height: 32px;
+  margin-top: 3px;
+}
+
+.reviewSection {
+  flex: 1;
+  padding: 0 10px;
+}
+
+.username {
+  color: #29383E;
+  font-weight: 900;
+  padding-right: 8px;
+}
+
+.review {
+  color: #777;
+}
+
+.time {
+  color: #9b9b9b;
+  font-size: 0.8rem;
+}

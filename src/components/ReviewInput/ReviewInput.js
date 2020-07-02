@@ -33,7 +33,7 @@ const reviewInput = props => {
   const stars = [1, 2, 3, 4, 5];
 
   return (
-    <div style={{ display: 'flex', padding: '7px' }}>
+    <div style={{ display: 'flex', paddingTop: '7px' }}>
       <span>{localStorage.getItem('firstName') + ' ' + localStorage.getItem('lastName')}</span>
       <div className={styles.input}>
         <div className={styles.stars}>
